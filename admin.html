@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#06122a">
+<title>Kulzzy Celebration Admin</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="page admin-page">
+  <section class="hero compact">
+    <div class="brand">KULZZY RADIO NETWORK</div>
+    <h1>CELEBRATION<br><span>ADMIN PANEL</span></h1>
+    <p class="hero-sub">Today's paid celebration bookings.</p>
+  </section>
+
+  <section class="card">
+    <div class="admin-toolbar">
+      <div><span>PAID BOOKINGS TODAY</span><strong id="adminCount">0</strong></div>
+      <button id="refreshButton" type="button">REFRESH</button>
+    </div>
+
+    <div id="adminMessage" class="message hidden"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Celebration</th>
+            <th>Who</th>
+            <th>Wishes</th>
+            <th>Date</th>
+            <th>On-Air</th>
+            <th>Amount</th>
+            <th>Reference</th>
+          </tr>
+        </thead>
+        <tbody id="bookingRows">
+          <tr><td colspan="9" class="empty">No paid bookings loaded.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <footer>ADMIN ACCESS • KULZZY RADIO NETWORK</footer>
+</main>
+<script src="js/admin.js"></script>
+</body>
+</html>
