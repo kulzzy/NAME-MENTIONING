@@ -17,8 +17,14 @@
 
   <section class="card">
     <div class="admin-toolbar">
-      <div><span>PAID BOOKINGS TODAY</span><strong id="adminCount">0</strong></div>
-      <button id="refreshButton" type="button">REFRESH</button>
+      <div>
+        <span>PAID BOOKINGS TODAY</span>
+        <strong id="adminCount">0</strong>
+      </div>
+
+      <button id="refreshButton" type="button">
+        REFRESH
+      </button>
     </div>
 
     <div id="adminMessage" class="message hidden"></div>
@@ -31,21 +37,29 @@
             <th>Name</th>
             <th>Celebration</th>
             <th>Who</th>
-            <th>Wishes</th>
             <th>Date</th>
             <th>On-Air</th>
             <th>Amount</th>
             <th>Reference</th>
           </tr>
         </thead>
+
         <tbody id="bookingRows">
-          <tr><td colspan="9" class="empty">No paid bookings loaded.</td></tr>
+          <tr>
+            <td colspan="8" class="empty">
+              No paid bookings loaded.
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
   </section>
-  <footer>ADMIN ACCESS • KULZZY RADIO NETWORK</footer>
+
+  <footer>
+    ADMIN ACCESS • KULZZY RADIO NETWORK
+  </footer>
 </main>
+
 <script src="js/admin.js"></script>
 </body>
 </html>
