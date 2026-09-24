@@ -5,7 +5,7 @@
   with real authentication.
 */
 
-const API_BASE_URL = "PASTE_YOUR_BACKEND_URL_HERE";
+const API_BASE_URL = "https://kulzzy-cloud-core-jzh19i.v2.appdeploy.ai";
 
 const adminCount =
   document.getElementById("adminCount");
