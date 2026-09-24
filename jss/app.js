@@ -6,8 +6,7 @@
   Put your real KULZZY CLOUD CORE backend URL below.
   Never put a secret Flutterwave key in this file.
 */
-
-const API_BASE_URL = "PASTE_YOUR_BACKEND_URL_HERE";
+const API_BASE_URL = "https://kulzzy-cloud-core-jzh19i.v2.appdeploy.ai";
 
 const form = document.getElementById("bookingForm");
 const message = document.getElementById("message");
