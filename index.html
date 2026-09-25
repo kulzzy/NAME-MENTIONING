@@ -123,31 +123,79 @@ body::after{
   display:none !important;
 }
 
-
 /* ==================================================
    TWO-LINE TITLE
 ================================================== */
 
 .hero h1{
   margin:8px auto 6px !important;
-  padding:0 8px !important;
+  padding:14px 8px !important;
 
-  font-size:clamp(21px, 6vw, 34px) !important;
+  font-size:clamp(26px, 7vw, 42px) !important;
   line-height:1.05 !important;
+
+  font-weight:900 !important;
 
   text-align:center !important;
 
   white-space:normal !important;
+
+  color:#fff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #06122a 0%,
+      #163b70 40%,
+      #8b1e1e 72%,
+      #d4a017 100%
+    ) !important;
+
+  border:2px solid #d4a017 !important;
+
+  border-radius:14px !important;
+
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.35),
+    inset 0 0 20px rgba(255,215,0,.15) !important;
+
+  text-shadow:
+    2px 2px 0 #000,
+    0 0 10px rgba(255,215,0,.5) !important;
 }
-
-
-/*
-   Force the title into exactly two visual lines.
-*/
 
 .hero h1 span{
   display:block !important;
-  margin-top:2px !important;
+  margin-top:3px !important;
+  font-weight:900 !important;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:600px){
+
+  .hero h1{
+    font-size:clamp(24px, 7.5vw, 34px) !important;
+    line-height:1.03 !important;
+    padding:13px 5px !important;
+  }
+
+}
+
+
+/* ==================================================
+   VERY SMALL PHONES
+================================================== */
+
+@media(max-width:380px){
+
+  .hero h1{
+    font-size:22px !important;
+  }
+
 }
 
 
