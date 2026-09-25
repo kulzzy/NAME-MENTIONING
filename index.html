@@ -1,0 +1,1017 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+
+«»
+
+<meta
+name="theme-color"
+content="#06122a"
+
+«»
+
+<title>AM CELEBRATING TODAY | Kulzzy Radio</title><link
+  rel="stylesheet"
+  href="css/style.css"
+><style>
+
+/* ==================================================
+   FIXED PAGE
+================================================== */
+
+html,
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+
+/* ==================================================
+   FIXED AFRICAN CELEBRATION PHOTO BACKGROUND
+================================================== */
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  z-index:-2;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  opacity:.18;
+  border-radius:28px;
+}
+
+
+body::before{
+  width:170px;
+  height:240px;
+  left:-55px;
+  top:18%;
+
+  background-image:
+  url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=80");
+}
+
+
+body::after{
+  width:170px;
+  height:240px;
+  right:-55px;
+  top:48%;
+
+  background-image:
+  url("https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=500&q=80");
+}
+
+
+.page::before,
+.page::after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+
+  width:135px;
+  height:135px;
+
+  border-radius:50%;
+
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+
+  opacity:.15;
+  pointer-events:none;
+}
+
+
+.page::before{
+  right:5px;
+  top:12%;
+
+  background-image:
+  url("https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=400&q=80");
+}
+
+
+.page::after{
+  left:5px;
+  bottom:8%;
+
+  background-image:
+  url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80");
+}
+
+
+/* ==================================================
+   PAGE CONTAINER
+================================================== */
+
+.page{
+  width:100%;
+  height:100vh;
+  height:100dvh;
+
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+}
+
+
+/* ==================================================
+   HERO
+================================================== */
+
+.hero{
+  position:relative;
+  z-index:1;
+  flex-shrink:0;
+}
+
+
+.brand{
+  display:none !important;
+}
+
+
+.live-count{
+  display:none !important;
+}
+
+
+/* ==================================================
+   BIG READABLE TITLE
+================================================== */
+
+.hero h1{
+  margin:8px auto 6px !important;
+
+  width:calc(100% - 20px) !important;
+
+  box-sizing:border-box !important;
+
+  padding:12px 8px !important;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif !important;
+
+  font-size:
+    clamp(38px, 12vw, 64px) !important;
+
+  line-height:
+    .95 !important;
+
+  font-weight:
+    900 !important;
+
+  letter-spacing:
+    .5px !important;
+
+  text-align:
+    center !important;
+
+  white-space:
+    nowrap !important;
+
+  color:#ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #06122a 0%,
+      #163b70 40%,
+      #8b1e1e 72%,
+      #d4a017 100%
+    ) !important;
+
+  border:
+    3px solid #ff0000 !important;
+
+  border-radius:
+    14px !important;
+
+  box-shadow:
+    0 5px 18px rgba(0,0,0,.35),
+    inset 0 0 20px rgba(255,215,0,.15),
+    0 0 8px rgba(255,0,0,.9),
+    0 0 18px rgba(255,0,0,.8) !important;
+
+  text-shadow:
+    2px 2px 0 #000,
+    0 0 10px rgba(255,215,0,.5) !important;
+
+  animation:
+    titleRedBlink 1s infinite !important;
+}
+
+
+/* ==================================================
+   TITLE TEXT
+================================================== */
+
+.hero h1 span{
+  display:inline !important;
+  margin:0 !important;
+  padding:0 !important;
+  font-weight:900 !important;
+}
+
+
+/* ==================================================
+   BLINKING RED EDGE LIGHT
+================================================== */
+
+@keyframes titleRedBlink{
+
+  0%,
+  100%{
+
+    border-color:#ff0000;
+
+    box-shadow:
+      0 5px 18px rgba(0,0,0,.35),
+      inset 0 0 20px rgba(255,215,0,.15),
+      0 0 5px rgba(255,0,0,.7),
+      0 0 10px rgba(255,0,0,.5);
+  }
+
+  50%{
+
+    border-color:#ff3333;
+
+    box-shadow:
+      0 5px 18px rgba(0,0,0,.35),
+      inset 0 0 20px rgba(255,215,0,.15),
+      0 0 12px rgba(255,0,0,1),
+      0 0 25px rgba(255,0,0,1),
+      0 0 42px rgba(255,0,0,.85);
+  }
+
+}
+
+
+/* ==================================================
+   SUBTITLE
+================================================== */
+
+.hero-sub{
+  margin-top:7px !important;
+  margin-bottom:10px !important;
+}
+
+
+/* ==================================================
+   FULL FORM AREA
+   PAGE STAYS STILL
+   WISHES NAVIGATION CONTROLS PAGE SCROLL
+================================================== */
+
+.card{
+  position:relative;
+  z-index:2;
+
+  flex:1 1 auto;
+
+  min-height:0;
+
+  height:auto;
+
+  overflow:visible;
+
+  -webkit-overflow-scrolling:touch;
+
+  overscroll-behavior:
+    auto;
+
+  touch-action:
+    pan-y;
+
+  scrollbar-width:auto;
+
+  padding-bottom:
+    20px;
+}
+
+
+/* ==================================================
+   PAYMENT BUTTON
+================================================== */
+
+#payButton{
+  position:relative;
+  z-index:10;
+
+  -webkit-tap-highlight-color:transparent;
+}
+
+
+#payButton:active{
+  transform:scale(.98);
+}
+
+
+/* ==================================================
+   MESSAGE
+================================================== */
+
+#message{
+  white-space:pre-wrap;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+footer{
+  flex-shrink:0;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:600px){
+
+  .hero h1{
+
+    font-size:
+      clamp(34px, 12vw, 52px) !important;
+
+    line-height:
+      .95 !important;
+
+    padding-left:
+      4px !important;
+
+    padding-right:
+      4px !important;
+
+    letter-spacing:
+      .3px !important;
+  }
+
+
+  .hero-sub{
+    font-size:13px !important;
+  }
+
+
+  body::before{
+    width:120px;
+    height:190px;
+    left:-50px;
+  }
+
+
+  body::after{
+    width:120px;
+    height:190px;
+    right:-50px;
+  }
+
+
+  .page::before,
+  .page::after{
+    width:100px;
+    height:100px;
+  }
+
+}
+
+
+/* ==================================================
+   VERY SMALL PHONES
+================================================== */
+
+@media(max-width:380px){
+
+  .hero h1{
+
+    font-size:
+      30px !important;
+
+    letter-spacing:
+      0 !important;
+  }
+
+
+  .hero-sub{
+    font-size:12px !important;
+  }
+
+}
+
+
+/* ==================================================
+   PREVENT PAGE-LEVEL MOVEMENT
+================================================== */
+
+body,
+.page,
+.hero,
+footer{
+  position:relative;
+}
+
+
+/* ==================================================
+   KEEP DECORATIVE ELEMENTS FROM CREATING SCROLL
+================================================== */
+
+body::before,
+body::after,
+.page::before,
+.page::after{
+  pointer-events:none;
+}
+
+</style></head><body><main class="page"><section class="hero">  <!-- KULZZY RADIO NETWORK REMOVED -->  <!-- BOOKED TODAY REMOVED -->  <h1>
+    CELEBRATE<br>
+    <span>ME</span>
+  </h1>  <p class="hero-sub">
+    Book your celebration for today and receive your place in the on-air queue.
+  </p></section><section class="card"><div
+  id="message"
+  class="message hidden"
+></div><form
+  id="bookingForm"
+  novalidate
+><label for="name">
+  TYPE IN NAME
+</label><input
+id="name"
+name="name"
+type="text"
+maxlength="100"
+placeholder="Enter the name to mention on-air"
+required
+
+«»
+
+<label for="email">
+  EMAIL ADDRESS
+</label><input
+id="email"
+name="email"
+type="email"
+maxlength="160"
+placeholder="Enter your email address"
+autocomplete="email"
+required
+
+«»
+
+<label for="celebrationType">
+  SELECT CELEBRATION TYPE
+</label><select
+id="celebrationType"
+name="celebrationType"
+required
+
+«»
+
+<option value="">
+  Choose celebration type
+</option><option>Birthday</option>
+<option>Wedding Anniversary</option>
+<option>Wedding</option>
+<option>Graduation</option>
+<option>Achievement</option>
+<option>New Baby</option>
+<option>Thanksgiving</option>
+<option>Other</option></select><label for="celebrating">
+  SELECT WHO YOU ARE CELEBRATING
+</label><select
+id="celebrating"
+name="celebrating"
+required
+
+«»
+
+<option value="">
+  Choose relationship
+</option><option>Myself</option>
+<option>My Child</option>
+<option>My Parent</option>
+<option>My Spouse</option>
+<option>My Partner</option>
+<option>My Sibling</option>
+<option>My Friend</option>
+<option>My Colleague</option>
+<option>Family Member</option>
+<option>Other</option></select><label for="date">
+  DATE OF CELEBRATION
+</label><input
+id="date"
+name="date"
+type="date"
+readonly
+required
+
+«»
+
+<small id="dateNotice">
+  Your celebration will be booked for today.
+</small><div class="payment-box"><span>
+  CELEBRATION PAYMENT
+</span><strong>
+  ₦3,000
+</strong></div><button
+type="submit"
+id="payButton"
+
+«»
+
+MAKE MY PAYMENT — ₦3,000
+</button>
+
+</form><section
+  id="success"
+  class="success hidden"
+><h2>
+  CELEBRATION BOOKED!
+</h2><div class="success-grid"><div><span>
+  BOOKING NUMBER
+</span><strong id="resultNumber">
+  —
+</strong></div><div><span>
+  ON-AIR TIME
+</span><strong id="resultTime">
+  —
+</strong></div></div><button
+type="button"
+id="newBooking"
+
+«»
+
+BOOK ANOTHER CELEBRATION
+</button>
+
+</section></section><footer>STAY TUNED IN AS WE MENTION YOUR NAME OR NAMES OF YOUR LOVED ONES
+
+</footer></main><script>
+
+(function(){
+
+"use strict";
+
+
+/* ==================================================
+   KULZZY CLOUD CORE
+================================================== */
+
+const API_BASE_URL =
+"https://kulzzy-cloud-core-jzh19i.v2.appdeploy.ai";
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const form =
+document.getElementById("bookingForm");
+
+const message =
+document.getElementById("message");
+
+const payButton =
+document.getElementById("payButton");
+
+const dateInput =
+document.getElementById("date");
+
+const success =
+document.getElementById("success");
+
+const newBooking =
+document.getElementById("newBooking");
+
+const nameInput =
+document.getElementById("name");
+
+const emailInput =
+document.getElementById("email");
+
+const celebrationType =
+document.getElementById("celebrationType");
+
+const celebrating =
+document.getElementById("celebrating");
+
+
+/* ==================================================
+   LAGOS TODAY
+================================================== */
+
+function lagosToday(){
+
+  return new Intl.DateTimeFormat(
+    "en-CA",
+    {
+      timeZone:"Africa/Lagos"
+    }
+  ).format(new Date());
+
+}
+
+
+/* ==================================================
+   MESSAGE
+================================================== */
+
+function showMessage(text){
+
+  message.textContent =
+  text;
+
+  message.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function clearMessage(){
+
+  message.textContent =
+  "";
+
+  message.classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* ==================================================
+   SET TODAY
+================================================== */
+
+function setToday(){
+
+  const today =
+  lagosToday();
+
+  dateInput.value =
+  today;
+
+  dateInput.min =
+  today;
+
+  dateInput.max =
+  today;
+
+}
+
+
+/* ==================================================
+   DATE PROTECTION
+================================================== */
+
+dateInput.addEventListener(
+  "change",
+  function(){
+
+    const today =
+    lagosToday();
+
+    if(
+      dateInput.value !== today
+    ){
+
+      dateInput.value =
+      today;
+
+      showMessage(
+        "Celebration bookings are accepted for today only."
+      );
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   START PAYMENT
+================================================== */
+
+form.addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    clearMessage();
+
+    const today =
+    lagosToday();
+
+    const name =
+    nameInput.value.trim();
+
+    const email =
+    emailInput.value.trim();
+
+    const type =
+    celebrationType.value;
+
+    const relationship =
+    celebrating.value;
+
+    const date =
+    dateInput.value;
+
+
+    /* VALIDATION */
+
+    if(!name){
+
+      showMessage(
+        "Please enter the name to mention on-air."
+      );
+
+      nameInput.focus();
+
+      return;
+
+    }
+
+
+    if(!email){
+
+      showMessage(
+        "Please enter your email address."
+      );
+
+      emailInput.focus();
+
+      return;
+
+    }
+
+
+    if(
+      !emailInput.checkValidity()
+    ){
+
+      showMessage(
+        "Please enter a valid email address."
+      );
+
+      emailInput.focus();
+
+      return;
+
+    }
+
+
+    if(!type){
+
+      showMessage(
+        "Please select a celebration type."
+      );
+
+      celebrationType.focus();
+
+      return;
+
+    }
+
+
+    if(!relationship){
+
+      showMessage(
+        "Please select who you are celebrating."
+      );
+
+      celebrating.focus();
+
+      return;
+
+    }
+
+
+    if(date !== today){
+
+      showMessage(
+        "Celebration bookings are accepted for today only."
+      );
+
+      setToday();
+
+      return;
+
+    }
+
+
+    /* ==================================================
+       DIRECT CLOUD CORE PAYMENT START
+    ================================================== */
+
+    payButton.disabled =
+    true;
+
+    payButton.textContent =
+    "PREPARING PAYMENT...";
+
+
+    const startUrl =
+    new URL(
+      API_BASE_URL +
+      "/api/celebrations/paystack/start"
+    );
+
+
+    startUrl.searchParams.set(
+      "name",
+      name
+    );
+
+
+    startUrl.searchParams.set(
+      "email",
+      email
+    );
+
+
+    startUrl.searchParams.set(
+      "celebrationType",
+      type
+    );
+
+
+    startUrl.searchParams.set(
+      "celebrating",
+      relationship
+    );
+
+
+    startUrl.searchParams.set(
+      "date",
+      date
+    );
+
+
+    startUrl.searchParams.set(
+      "returnUrl",
+      window.location.origin +
+      window.location.pathname
+    );
+
+
+    window.location.href =
+    startUrl.toString();
+
+  }
+);
+
+
+/* ==================================================
+   PAYMENT RETURN
+================================================== */
+
+function handlePaymentReturn(){
+
+  const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+  const payment =
+  params.get("payment");
+
+
+  /* SUCCESS */
+
+  if(
+    payment === "success"
+  ){
+
+    document.getElementById(
+      "resultNumber"
+    ).textContent =
+    params.get(
+      "bookingNumber"
+    ) || "—";
+
+
+    document.getElementById(
+      "resultTime"
+    ).textContent =
+    params.get(
+      "onAirTime"
+    ) || "—";
+
+
+    form.classList.add(
+      "hidden"
+    );
+
+
+    success.classList.remove(
+      "hidden"
+    );
+
+
+    history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+
+    return;
+
+  }
+
+
+  /* FAILED */
+
+  if(
+    payment === "failed"
+  ){
+
+    showMessage(
+      params.get("message") ||
+      "Payment was not completed. Please try again."
+    );
+
+
+    history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   BOOK ANOTHER CELEBRATION
+================================================== */
+
+newBooking.addEventListener(
+  "click",
+  function(){
+
+    form.classList.remove(
+      "hidden"
+    );
+
+
+    success.classList.add(
+      "hidden"
+    );
+
+
+    form.reset();
+
+
+    setToday();
+
+
+    clearMessage();
+
+
+    const card =
+    document.querySelector(".card");
+
+
+    card.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }
+);
+
+
+/* ==================================================
+   START
+================================================== */
+
+setToday();
+
+handlePaymentReturn();
+
+
+})();
+
+</script>
+</body>
+</html>
