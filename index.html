@@ -588,11 +588,11 @@ STAY TUNED IN AS WE MENTION YOUR NAME OR NAMES OF YOUR LOVED ONES
 
 
 /* ==================================================
-   KULZZY PAYMENT CORE
+   KULZZY PAYMENT PAGE
 ================================================== */
 
-const PAYMENT_CORE_URL =
-"https://kulzzy.github.io/KULZZY-PAYMENT-CORE/";
+const PAYMENT_PAGE_URL =
+"https://kulzzy.github.io/NAME-MENTIONING/payment.html";
 
 
 /* ==================================================
@@ -721,7 +721,7 @@ dateInput.addEventListener(
 
 
 /* ==================================================
-   START KULZZY PAYMENT CORE
+   SEND VALID BOOKING TO PAYMENT PAGE
 ================================================== */
 
 form.addEventListener(
@@ -806,7 +806,38 @@ form.addEventListener(
 
 
     /* ==================================================
-       SEND CUSTOMER TO CENTRAL PAYMENT CORE
+       PRESERVE BOOKING DETAILS FOR PAYMENT PAGE
+    ================================================== */
+
+    const bookingDetails = {
+      name: name,
+      celebrationType: type,
+      celebrating: relationship,
+      date: date,
+      amount: 3000,
+      purpose: "BOOK YOUR CELEBRATIONS"
+    };
+
+    try {
+
+      sessionStorage.setItem(
+        "kulzzyCelebrationBooking",
+        JSON.stringify(bookingDetails)
+      );
+
+    } catch(error) {
+
+      showMessage(
+        "Unable to prepare your booking. Please check your browser settings and try again."
+      );
+
+      return;
+
+    }
+
+
+    /* ==================================================
+       OPEN PAYMENT PAGE
     ================================================== */
 
     payButton.disabled =
@@ -818,75 +849,34 @@ form.addEventListener(
 
     const paymentUrl =
     new URL(
-      PAYMENT_CORE_URL
+      PAYMENT_PAGE_URL
     );
 
-
-    /* PAYMENT DETAILS */
-
-    paymentUrl.searchParams.set(
-      "amount",
-      "3000"
-    );
-
-
-    paymentUrl.searchParams.set(
-      "purpose",
-      "BOOK YOUR CELEBRATIONS"
-    );
-
-
-    paymentUrl.searchParams.set(
-      "product",
-      "Book your celebration now"
-    );
-
-
-    /* CUSTOMER NAME */
 
     paymentUrl.searchParams.set(
       "name",
       name
     );
 
-
-    /* ==================================================
-       RETURN TO THIS CELEBRATION PAGE
-    ================================================== */
-
-    paymentUrl.searchParams.set(
-      "return",
-      window.location.origin +
-      window.location.pathname
-    );
-
-
-    /*
-      Keep the celebration information available
-      in the browser URL when the customer returns.
-    */
-
     paymentUrl.searchParams.set(
       "celebrationType",
       type
     );
-
 
     paymentUrl.searchParams.set(
       "celebrating",
       relationship
     );
 
-
     paymentUrl.searchParams.set(
       "date",
       date
     );
 
-
-    /*
-      GO TO KULZZY PAYMENT CORE
-    */
+    paymentUrl.searchParams.set(
+      "amount",
+      "3000"
+    );
 
     window.location.href =
     paymentUrl.toString();
