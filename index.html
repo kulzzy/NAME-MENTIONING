@@ -54,6 +54,9 @@ body::after{
   border-radius:28px;
 }
 
+
+/* Left celebration picture */
+
 body::before{
   width:170px;
   height:240px;
@@ -63,6 +66,9 @@ body::before{
   background-image:
   url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=80");
 }
+
+
+/* Right celebration picture */
 
 body::after{
   width:170px;
@@ -75,7 +81,7 @@ body::after{
 }
 
 
-/* EXTRA FLOATING PICTURES */
+/* Extra floating pictures */
 
 .page::before,
 .page::after{
@@ -96,6 +102,7 @@ body::after{
   pointer-events:none;
 }
 
+
 .page::before{
   right:5px;
   top:12%;
@@ -103,6 +110,7 @@ body::after{
   background-image:
   url("https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=400&q=80");
 }
+
 
 .page::after{
   left:5px;
@@ -120,7 +128,6 @@ body::after{
 .page{
   width:100%;
   height:100vh;
-  height:100dvh;
   overflow:hidden;
 
   display:flex;
@@ -138,14 +145,19 @@ body::after{
   flex-shrink:0;
 }
 
-.brand,
+
+.brand{
+  display:none !important;
+}
+
+
 .live-count{
   display:none !important;
 }
 
 
 /* ==================================================
-   TITLE
+   TWO-LINE TITLE
 ================================================== */
 
 .hero h1{
@@ -175,6 +187,7 @@ body::after{
   ) !important;
 
   border:2px solid #ff0000 !important;
+
   border-radius:14px !important;
 
   box-shadow:
@@ -187,8 +200,10 @@ body::after{
   2px 2px 0 #000,
   0 0 10px rgba(255,215,0,.5) !important;
 
-  animation:titleRedBlink 1s infinite !important;
+  animation:
+  titleRedBlink 1s infinite !important;
 }
+
 
 .hero h1 span{
   display:inline !important;
@@ -198,12 +213,13 @@ body::after{
 
 
 /* ==================================================
-   BLINKING RED LIGHT
+   BLINKING RED LIGHT AROUND TITLE
 ================================================== */
 
 @keyframes titleRedBlink{
 
-  0%,100%{
+  0%,
+  100%{
     border-color:#ff0000;
 
     box-shadow:
@@ -246,12 +262,14 @@ body::after{
   z-index:2;
 
   flex:1 1 auto;
+
   min-height:0;
 
   overflow-y:auto;
   overflow-x:hidden;
 
   -webkit-overflow-scrolling:touch;
+
   touch-action:pan-y;
 
   scrollbar-width:auto;
@@ -267,16 +285,11 @@ body::after{
   z-index:10;
 
   -webkit-tap-highlight-color:transparent;
-  cursor:pointer;
 }
+
 
 #payButton:active{
   transform:scale(.98);
-}
-
-#payButton:disabled{
-  opacity:.7;
-  cursor:wait;
 }
 
 
@@ -286,15 +299,6 @@ body::after{
 
 #message{
   white-space:pre-wrap;
-}
-
-
-/* ==================================================
-   HIDDEN ELEMENTS
-================================================== */
-
-.hidden{
-  display:none !important;
 }
 
 
@@ -364,7 +368,7 @@ footer{
 
 
 /* ==================================================
-   DECORATIVE IMAGE POSITIONING
+   DO NOT ALLOW DECORATIVE IMAGES TO CREATE SCROLL
 ================================================== */
 
 body,
@@ -377,11 +381,16 @@ body,
 
 </head>
 
+
 <body>
 
 <main class="page">
 
 <section class="hero">
+
+  <!-- KULZZY RADIO NETWORK REMOVED -->
+
+  <!-- BOOKED TODAY REMOVED -->
 
   <p class="hero-sub">
     Book your celebration for today and receive your place in the on-air queue.
@@ -395,7 +404,6 @@ body,
 <div
   id="message"
   class="message hidden"
-  role="alert"
 ></div>
 
 
@@ -529,9 +537,12 @@ body,
   BOOKING NUMBER
 </span>
 
-<strong id="resultNumber">—</strong>
+<strong id="resultNumber">
+  —
+</strong>
 
 </div>
+
 
 <div>
 
@@ -539,11 +550,14 @@ body,
   ON-AIR TIME
 </span>
 
-<strong id="resultTime">—</strong>
+<strong id="resultTime">
+  —
+</strong>
 
 </div>
 
 </div>
+
 
 <button
   type="button"
@@ -558,7 +572,9 @@ body,
 
 
 <footer>
+
 STAY TUNED IN AS WE MENTION YOUR NAME OR NAMES OF YOUR LOVED ONES
+
 </footer>
 
 </main>
@@ -572,11 +588,11 @@ STAY TUNED IN AS WE MENTION YOUR NAME OR NAMES OF YOUR LOVED ONES
 
 
 /* ==================================================
-   SELAR PAYMENT LINK
+   KULZZY PAYMENT CORE
 ================================================== */
 
-const SELAR_PAYMENT_URL =
-"https://selar.com/5772b1677z?add_to_cart=1";
+const PAYMENT_CORE_URL =
+"https://kulzzy.github.io/KULZZY-PAYMENT-CORE/";
 
 
 /* ==================================================
@@ -617,30 +633,12 @@ document.getElementById("celebrating");
 
 function lagosToday(){
 
-  const parts =
-  new Intl.DateTimeFormat(
-    "en-GB",
+  return new Intl.DateTimeFormat(
+    "en-CA",
     {
-      timeZone:"Africa/Lagos",
-      year:"numeric",
-      month:"2-digit",
-      day:"2-digit"
+      timeZone:"Africa/Lagos"
     }
-  ).formatToParts(new Date());
-
-  const values = {};
-
-  parts.forEach(function(part){
-
-    values[part.type] = part.value;
-
-  });
-
-  return (
-    values.year + "-" +
-    values.month + "-" +
-    values.day
-  );
+  ).format(new Date());
 
 }
 
@@ -651,17 +649,24 @@ function lagosToday(){
 
 function showMessage(text){
 
-  message.textContent = text;
+  message.textContent =
+  text;
 
-  message.classList.remove("hidden");
+  message.classList.remove(
+    "hidden"
+  );
 
 }
 
+
 function clearMessage(){
 
-  message.textContent = "";
+  message.textContent =
+  "";
 
-  message.classList.add("hidden");
+  message.classList.add(
+    "hidden"
+  );
 
 }
 
@@ -672,11 +677,17 @@ function clearMessage(){
 
 function setToday(){
 
-  const today = lagosToday();
+  const today =
+  lagosToday();
 
-  dateInput.value = today;
-  dateInput.min = today;
-  dateInput.max = today;
+  dateInput.value =
+  today;
+
+  dateInput.min =
+  today;
+
+  dateInput.max =
+  today;
 
 }
 
@@ -689,11 +700,15 @@ dateInput.addEventListener(
   "change",
   function(){
 
-    const today = lagosToday();
+    const today =
+    lagosToday();
 
-    if(dateInput.value !== today){
+    if(
+      dateInput.value !== today
+    ){
 
-      dateInput.value = today;
+      dateInput.value =
+      today;
 
       showMessage(
         "Celebration bookings are accepted for today only."
@@ -706,8 +721,7 @@ dateInput.addEventListener(
 
 
 /* ==================================================
-   PAYMENT
-   DIRECT SELAR CHECKOUT
+   START KULZZY PAYMENT CORE
 ================================================== */
 
 form.addEventListener(
@@ -715,21 +729,29 @@ form.addEventListener(
   function(event){
 
     event.preventDefault();
+    event.stopPropagation();
 
     clearMessage();
 
-    const today = lagosToday();
+    const today =
+    lagosToday();
 
-    const name = nameInput.value.trim();
+    const name =
+    nameInput.value.trim();
 
-    const type = celebrationType.value;
+    const type =
+    celebrationType.value;
 
-    const relationship = celebrating.value;
+    const relationship =
+    celebrating.value;
 
-    const date = dateInput.value;
+    const date =
+    dateInput.value;
 
 
-    /* VALIDATION */
+    /* ==================================================
+       VALIDATION
+    ================================================== */
 
     if(!name){
 
@@ -783,63 +805,205 @@ form.addEventListener(
     }
 
 
+    /* ==================================================
+       SEND CUSTOMER TO CENTRAL PAYMENT CORE
+    ================================================== */
+
+    payButton.disabled =
+    true;
+
+    payButton.textContent =
+    "OPENING PAYMENT...";
+
+
+    const paymentUrl =
+    new URL(
+      PAYMENT_CORE_URL
+    );
+
+
+    /* PAYMENT DETAILS */
+
+    paymentUrl.searchParams.set(
+      "amount",
+      "3000"
+    );
+
+
+    paymentUrl.searchParams.set(
+      "purpose",
+      "BOOK YOUR CELEBRATIONS"
+    );
+
+
+    paymentUrl.searchParams.set(
+      "product",
+      "Book your celebration now"
+    );
+
+
+    /* CUSTOMER NAME */
+
+    paymentUrl.searchParams.set(
+      "name",
+      name
+    );
+
+
+    /* ==================================================
+       RETURN TO THIS CELEBRATION PAGE
+    ================================================== */
+
+    paymentUrl.searchParams.set(
+      "return",
+      window.location.origin +
+      window.location.pathname
+    );
+
+
     /*
-      Save the booking details on this device.
-      This does not confirm payment or create a booking.
+      Keep the celebration information available
+      in the browser URL when the customer returns.
     */
 
-    try{
+    paymentUrl.searchParams.set(
+      "celebrationType",
+      type
+    );
 
-      sessionStorage.setItem(
-        "kulzzyPendingCelebration",
-        JSON.stringify({
-          name:name,
-          celebrationType:type,
-          celebrating:relationship,
-          date:date,
-          amount:3000
-        })
-      );
 
-    }catch(error){
+    paymentUrl.searchParams.set(
+      "celebrating",
+      relationship
+    );
 
-      /* Payment can still open if storage is unavailable. */
 
-    }
+    paymentUrl.searchParams.set(
+      "date",
+      date
+    );
 
 
     /*
-      Open Selar directly.
-      Do not send Selar through Kulzzy Payment Core.
+      GO TO KULZZY PAYMENT CORE
     */
 
-    payButton.disabled = true;
-
-    payButton.textContent = "OPENING SELAR CHECKOUT...";
-
-    window.location.assign(SELAR_PAYMENT_URL);
+    window.location.href =
+    paymentUrl.toString();
 
   }
 );
 
 
 /* ==================================================
-   NEW CELEBRATION
+   PAYMENT RETURN
+================================================== */
+
+function handlePaymentReturn(){
+
+  const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+  const payment =
+  params.get("payment");
+
+
+  /* SUCCESS */
+
+  if(
+    payment === "success"
+  ){
+
+    document.getElementById(
+      "resultNumber"
+    ).textContent =
+    params.get(
+      "bookingNumber"
+    ) || "—";
+
+
+    document.getElementById(
+      "resultTime"
+    ).textContent =
+    params.get(
+      "onAirTime"
+    ) || "—";
+
+
+    form.classList.add(
+      "hidden"
+    );
+
+
+    success.classList.remove(
+      "hidden"
+    );
+
+
+    history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+
+    return;
+
+  }
+
+
+  /* FAILED */
+
+  if(
+    payment === "failed"
+  ){
+
+    showMessage(
+      params.get("message") ||
+      "Payment was not completed. Please try again."
+    );
+
+
+    history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+  }
+
+}
+
+
+/* ==================================================
+   BOOK ANOTHER CELEBRATION
 ================================================== */
 
 newBooking.addEventListener(
   "click",
   function(){
 
-    form.classList.remove("hidden");
+    form.classList.remove(
+      "hidden"
+    );
 
-    success.classList.add("hidden");
+
+    success.classList.add(
+      "hidden"
+    );
+
 
     form.reset();
 
+
     setToday();
 
+
     clearMessage();
+
 
     document.querySelector(".card").scrollTo({
       top:0,
@@ -855,6 +1019,8 @@ newBooking.addEventListener(
 ================================================== */
 
 setToday();
+
+handlePaymentReturn();
 
 
 })();
