@@ -2,159 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#06122a">
-
-<title>Kulzzy Radio | Services Payment</title>
+<title>Payment | Kulzzy Radio</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html,
+* { box-sizing: border-box; }
 body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-}
-
-body {
+  padding: 18px;
   min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  display: grid;
+  place-items: center;
   background: #06122a;
-  color: #ffffff;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
-
-.payment-page {
+.card {
   width: 100%;
-  max-width: 440px;
-  padding: 28px 22px;
-  text-align: center;
-  background: linear-gradient(145deg, #0b1b38, #102b50);
-  border: 2px solid #d4a017;
+  max-width: 520px;
+  padding: 25px;
+  border: 1px solid #314568;
   border-radius: 18px;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+  background: #0d1c39;
 }
-
-.brand {
-  margin: 0 0 10px;
-  color: #ffd700;
-  font-size: 29px;
-  font-weight: 900;
-  letter-spacing: 1px;
+.brand, h1, .price { color: #ffd700; }
+.brand { font-weight: 900; letter-spacing: 2px; }
+h1 { font-size: 27px; line-height: 1.25; }
+.price { font-size: 34px; font-weight: 900; }
+p { line-height: 1.7; }
+.reference {
+  background: #06122a;
+  border: 1px solid #314568;
+  border-radius: 9px;
+  padding: 12px;
+  overflow-wrap: anywhere;
 }
-
-.heading {
-  margin: 0;
-  color: #ffffff;
-  font-size: 21px;
-  font-weight: 800;
-  line-height: 1.4;
-}
-
-.subtitle {
-  margin: 14px 0;
-  color: #e1e7f0;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-.amount-label {
-  margin-top: 25px;
-  color: #ffffff;
-  font-size: 14px;
-}
-
-.pay-button {
+button, .pay {
   display: block;
   width: 100%;
-  margin-top: 24px;
-  padding: 17px 12px;
+  margin-top: 14px;
+  padding: 15px;
   border: 0;
   border-radius: 10px;
-  background: #ffd700;
-  color: #06122a;
-  font-size: 19px;
-  font-weight: 900;
   text-align: center;
+  font-weight: 900;
+  font-size: 16px;
   text-decoration: none;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
 }
-
-.pay-button:active {
-  transform: scale(0.98);
-}
-
-.notice {
-  margin: 18px 0 0;
-  color: #d5dceb;
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.footer {
-  margin-top: 27px;
-  padding-top: 17px;
-  border-top: 1px solid rgba(212, 160, 23, 0.4);
-  color: #ffd700;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-@media (max-width: 380px) {
-  .payment-page {
-    padding: 24px 17px;
-  }
-
-  .brand {
-    font-size: 25px;
-  }
-
-  .heading {
-    font-size: 19px;
-  }
-}
+.pay { background: #ffd700; color: #06122a; }
+.back { color: #ffd700; }
+.small { color: #cbd5e1; font-size: 13px; }
 </style>
 </head>
 
 <body>
+<main class="card">
+  <div class="brand">KULZZY RADIO NETWORK</div>
 
-<main class="payment-page">
+  <h1>ANNOUNCEMENT WITH AUDIOVISUAL</h1>
 
-  <h1 class="brand">KULZZY RADIO</h1>
+  <p>Booking fee</p>
+  <div class="price">₦5,000</div>
 
-  <h2 class="heading">
-    OFFICIAL SERVICES PAYMENT
-  </h2>
+  <p>Your booking reference:</p>
+  <div class="reference" id="bookingReference">Loading...</div>
 
-  <a
-    id="payNow"
-    class="pay-button"
-    href="https://selar.com/5772b1677z?add_to_cart=1"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    PAY NOW
-  </a>
+  <button type="button" id="copyButton">COPY BOOKING REFERENCE</button>
 
-  <p class="notice">
-    Tap PAY NOW to continue to the designated payment checkout and follow the instructions to complete your payment.
+  <p>
+    Continue to Selar to make your payment. Please confirm the displayed
+    product and amount on Selar before completing the transaction.
   </p>
 
-  <footer class="footer">
-    KULZZY RADIO — CELEBRATING LIVES EVERYDAY
-  </footer>
+  <a class="pay"
+     href="https://selar.com/5772b1677z?add_to_cart=1"
+     target="_blank"
+     rel="noopener noreferrer">
+     CONTINUE TO SELAR PAYMENT
+  </a>
 
+  <p class="small">
+    Keep your booking reference and payment receipt. A booking submission
+    does not by itself mean that payment has been verified.
+  </p>
+
+  <p><a class="back"
+    href="https://kulzzy.github.io/NAME-MENTIONING/">
+    Return to booking page
+  </a></p>
 </main>
 
+<script>
+"use strict";
+
+const params = new URLSearchParams(window.location.search);
+let bookingId = params.get("bookingId") || "";
+
+if (!bookingId) {
+  try {
+    const saved = JSON.parse(
+      sessionStorage.getItem("kulzzyAudiovisualBooking") || "{}"
+    );
+    bookingId = saved.bookingId || "";
+  } catch (_) {}
+}
+
+const referenceBox = document.getElementById("bookingReference");
+referenceBox.textContent = bookingId || "No booking reference found";
+
+document.getElementById("copyButton").addEventListener("click", async () => {
+  if (!bookingId) {
+    alert("No booking reference is available.");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(bookingId);
+    alert("Booking reference copied.");
+  } catch (_) {
+    const range = document.createRange();
+    range.selectNodeContents(referenceBox);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    alert("Select and copy the booking reference shown above.");
+  }
+});
+</script>
 </body>
 </html>
