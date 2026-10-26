@@ -1,1021 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
->
-
-<meta
-  name="theme-color"
-  content="#06122a"
->
-
-<title>AM CELEBRATING TODAY | Kulzzy Radio</title>
-
-<link
-  rel="stylesheet"
-  href="css/style.css"
->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06122a">
+<title>Announcement With Audiovisual | Kulzzy Radio</title>
 
 <style>
-
-/* ==================================================
-   BLOGGER / PAGE VISUAL ADJUSTMENTS
-================================================== */
-
-html,
-body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
+:root {
+  --navy: #06122a;
+  --gold: #ffd700;
+  --white: #ffffff;
+  --muted: #cbd5e1;
+  --panel: #0d1c39;
 }
-
-
-/* ==================================================
-   FIXED AFRICAN CELEBRATION PHOTO BACKGROUND
-================================================== */
-
-body::before,
-body::after{
-  content:"";
-  position:fixed;
-  z-index:-2;
-  pointer-events:none;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
-  opacity:.18;
-  border-radius:28px;
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--navy);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-
-/* Left celebration picture */
-
-body::before{
-  width:170px;
-  height:240px;
-  left:-55px;
-  top:18%;
-
-  background-image:
-  url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=80");
+header {
+  text-align: center;
+  padding: 25px 15px;
+  background: linear-gradient(140deg, #06122a, #142b50);
+  border-bottom: 2px solid var(--gold);
 }
-
-
-/* Right celebration picture */
-
-body::after{
-  width:170px;
-  height:240px;
-  right:-55px;
-  top:48%;
-
-  background-image:
-  url("https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=500&q=80");
+.brand {
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 23px;
 }
-
-
-/* Extra floating pictures */
-
-.page::before,
-.page::after{
-  content:"";
-  position:fixed;
-  z-index:-1;
-
-  width:135px;
-  height:135px;
-
-  border-radius:50%;
-
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
-
-  opacity:.15;
-  pointer-events:none;
+header p { color: var(--muted); margin-bottom: 0; }
+main {
+  max-width: 650px;
+  margin: auto;
+  padding: 20px 14px 40px;
 }
-
-
-.page::before{
-  right:5px;
-  top:12%;
-
-  background-image:
-  url("https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=400&q=80");
+.card {
+  background: var(--panel);
+  border: 1px solid #23395e;
+  border-radius: 17px;
+  padding: 20px;
+  margin-bottom: 18px;
 }
-
-
-.page::after{
-  left:5px;
-  bottom:8%;
-
-  background-image:
-  url("https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80");
+h1 {
+  color: var(--gold);
+  font-size: 27px;
+  line-height: 1.2;
+  margin-top: 0;
 }
-
-
-/* ==================================================
-   FIXED PAGE
-================================================== */
-
-.page{
-  width:100%;
-  height:100vh;
-  overflow:hidden;
-
-  display:flex;
-  flex-direction:column;
+h2 { color: var(--gold); font-size: 19px; }
+.price {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--gold);
+  margin: 12px 0;
 }
-
-
-/* ==================================================
-   HERO
-================================================== */
-
-.hero{
-  position:relative;
-  z-index:1;
-  flex-shrink:0;
+label {
+  display: block;
+  margin: 17px 0 7px;
+  font-weight: 700;
 }
-
-
-.brand{
-  display:none !important;
+input, textarea {
+  width: 100%;
+  border: 1px solid #50617d;
+  background: #06122a;
+  color: white;
+  border-radius: 9px;
+  padding: 13px;
+  font-size: 16px;
 }
-
-
-.live-count{
-  display:none !important;
+input[type="file"] { padding: 10px; }
+.help {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
 }
-
-
-/* ==================================================
-   TWO-LINE TITLE
-================================================== */
-
-.hero h1{
-  margin:8px auto 6px !important;
-  padding:14px 8px !important;
-
-  width:calc(100% - 20px) !important;
-  box-sizing:border-box !important;
-
-  font-family:Arial, Helvetica, sans-serif !important;
-  font-size:clamp(30px, 9vw, 48px) !important;
-  line-height:1 !important;
-  font-weight:900 !important;
-
-  text-align:center !important;
-  white-space:nowrap !important;
-
-  color:#fff !important;
-
-  background:
-  linear-gradient(
-    135deg,
-    #06122a 0%,
-    #163b70 40%,
-    #8b1e1e 72%,
-    #d4a017 100%
-  ) !important;
-
-  border:2px solid #ff0000 !important;
-
-  border-radius:14px !important;
-
-  box-shadow:
-  0 5px 18px rgba(0,0,0,.35),
-  inset 0 0 20px rgba(255,215,0,.15),
-  0 0 8px rgba(255,0,0,.9),
-  0 0 18px rgba(255,0,0,.8) !important;
-
-  text-shadow:
-  2px 2px 0 #000,
-  0 0 10px rgba(255,215,0,.5) !important;
-
-  animation:
-  titleRedBlink 1s infinite !important;
+button, .button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 900;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
 }
-
-
-.hero h1 span{
-  display:inline !important;
-  margin-top:0 !important;
-  font-weight:900 !important;
+.primary {
+  background: var(--gold);
+  color: #06122a;
 }
-
-
-/* ==================================================
-   BLINKING RED LIGHT AROUND TITLE
-================================================== */
-
-@keyframes titleRedBlink{
-
-  0%,
-  100%{
-    border-color:#ff0000;
-
-    box-shadow:
-    0 5px 18px rgba(0,0,0,.35),
-    inset 0 0 20px rgba(255,215,0,.15),
-    0 0 6px rgba(255,0,0,.7),
-    0 0 12px rgba(255,0,0,.6);
-  }
-
-  50%{
-    border-color:#ff3333;
-
-    box-shadow:
-    0 5px 18px rgba(0,0,0,.35),
-    inset 0 0 20px rgba(255,215,0,.15),
-    0 0 14px rgba(255,0,0,1),
-    0 0 30px rgba(255,0,0,1),
-    0 0 45px rgba(255,0,0,.75);
-  }
-
+.secondary {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
 }
-
-
-/* ==================================================
-   SUBTITLE
-================================================== */
-
-.hero-sub{
-  margin-top:7px !important;
-  margin-bottom:10px !important;
+button:disabled {
+  opacity: .55;
+  cursor: wait;
 }
-
-
-/* ==================================================
-   SCROLLABLE FORM AREA
-================================================== */
-
-.card{
-  position:relative;
-  z-index:2;
-
-  flex:1 1 auto;
-
-  min-height:0;
-
-  overflow-y:auto;
-  overflow-x:hidden;
-
-  -webkit-overflow-scrolling:touch;
-
-  touch-action:pan-y;
-
-  scrollbar-width:auto;
+#previews {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
 }
-
-
-/* ==================================================
-   PAYMENT BUTTON
-================================================== */
-
-#payButton{
-  position:relative;
-  z-index:10;
-
-  -webkit-tap-highlight-color:transparent;
+.preview {
+  border: 1px solid #50617d;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #06122a;
 }
-
-
-#payButton:active{
-  transform:scale(.98);
+.preview img {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  display: block;
 }
-
-
-/* ==================================================
-   MESSAGE
-================================================== */
-
-#message{
-  white-space:pre-wrap;
+.preview span {
+  display: block;
+  padding: 7px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
 }
-
-
-/* ==================================================
-   FOOTER
-================================================== */
-
-footer{
-  flex-shrink:0;
+#status {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin-top: 15px;
+  font-weight: bold;
 }
-
-
-/* ==================================================
-   MOBILE
-================================================== */
-
-@media(max-width:600px){
-
-  .hero h1{
-    font-size:clamp(27px, 9.5vw, 38px) !important;
-    line-height:1 !important;
-
-    padding-left:4px !important;
-    padding-right:4px !important;
-  }
-
-  .hero-sub{
-    font-size:13px !important;
-  }
-
-  body::before{
-    width:120px;
-    height:190px;
-    left:-50px;
-  }
-
-  body::after{
-    width:120px;
-    height:190px;
-    right:-50px;
-  }
-
-  .page::before,
-  .page::after{
-    width:100px;
-    height:100px;
-  }
-
+.good { color: #6ee7a0; }
+.bad { color: #ff9292; }
+footer {
+  padding: 22px;
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid #23395e;
+  font-size: 13px;
 }
-
-
-/* ==================================================
-   VERY SMALL PHONES
-================================================== */
-
-@media(max-width:380px){
-
-  .hero h1{
-    font-size:25px !important;
-  }
-
-  .hero-sub{
-    font-size:12px !important;
-  }
-
-}
-
-
-/* ==================================================
-   DO NOT ALLOW DECORATIVE IMAGES TO CREATE SCROLL
-================================================== */
-
-body,
-.hero,
-.card{
-  position:relative;
-}
-
 </style>
-
 </head>
 
-
 <body>
+<header>
+  <div class="brand">KULZZY RADIO NETWORK</div>
+  <p>Celebrating Lives Everyday</p>
+</header>
 
-<main class="page">
+<main>
+  <section class="card">
+    <h1>ANNOUNCEMENT WITH AUDIOVISUAL</h1>
+    <p>
+      Celebrate someone special with Kulzzy Radio. Submit the celebrant's
+      details and five pictures for your audiovisual celebration booking.
+    </p>
+    <div class="price">₦5,000</div>
+    <p class="help">
+      Required: your name, active WhatsApp number with country code,
+      and exactly five pictures.
+    </p>
+  </section>
 
-<section class="hero">
+  <form id="bookingForm">
+    <section class="card">
+      <h2>01 — Your Details</h2>
 
-  <!-- KULZZY RADIO NETWORK REMOVED -->
+      <label for="customerName">Your Full Name *</label>
+      <input id="customerName" name="customerName"
+        type="text" maxlength="100" autocomplete="name" required>
 
-  <!-- BOOKED TODAY REMOVED -->
+      <label for="whatsapp">Active WhatsApp Number *</label>
+      <input id="whatsapp" name="whatsapp" type="tel"
+        placeholder="+2348012345678" maxlength="20"
+        autocomplete="tel" required>
+      <p class="help">
+        Include your country code. Example for Nigeria: +2348012345678.
+        Enter the number in international format.
+      </p>
 
-  <p class="hero-sub">
-    Book your celebration for today and receive your place in the on-air queue.
-  </p>
+      <label for="celebrantName">Celebrant's Full Name *</label>
+      <input id="celebrantName" name="celebrantName"
+        type="text" maxlength="100" required>
 
-</section>
+      <label for="relationship">Your Relationship to the Celebrant *</label>
+      <input id="relationship" name="relationship"
+        type="text" maxlength="100"
+        placeholder="e.g. Mother, friend, husband, business partner"
+        required>
 
+      <label for="wish">Celebration Message / Wish *</label>
+      <textarea id="wish" name="wish" rows="4" maxlength="1200"
+        placeholder="Write the message you want to send..."
+        required></textarea>
+    </section>
 
-<section class="card">
+    <section class="card">
+      <h2>02 — Upload Five Pictures</h2>
+      <p class="help">
+        Select exactly five pictures. JPG, PNG, or WebP images are accepted.
+        Each original picture must be 12 MB or smaller.
+      </p>
 
-<div
-  id="message"
-  class="message hidden"
-></div>
+      <label for="photos">Select Exactly 5 Pictures *</label>
+      <input id="photos" name="photos" type="file"
+        accept="image/jpeg,image/png,image/webp" multiple required>
 
+      <p id="photoCount" class="help">0 of 5 pictures selected.</p>
+      <div id="previews"></div>
+    </section>
 
-<form
-  id="bookingForm"
-  novalidate
->
+    <section class="card">
+      <h2>03 — Submit Your Booking</h2>
+      <p class="help">
+        Your booking details and pictures will be submitted to Kulzzy Radio's
+        booking system first. After successful submission, you will continue
+        to the payment page.
+      </p>
 
-<label for="name">
-  TYPE IN NAME
-</label>
+      <button class="primary" id="submitBtn" type="submit">
+        SUBMIT BOOKING — ₦5,000
+      </button>
 
-<input
-  id="name"
-  name="name"
-  type="text"
-  maxlength="100"
-  placeholder="Enter the name to mention on-air"
-  required
->
+      <div id="status" role="status" aria-live="polite"></div>
+    </section>
+  </form>
 
-
-<label for="celebrationType">
-  SELECT CELEBRATION TYPE
-</label>
-
-<select
-  id="celebrationType"
-  name="celebrationType"
-  required
->
-
-<option value="">
-  Choose celebration type
-</option>
-
-<option>Birthday</option>
-<option>Wedding Anniversary</option>
-<option>Wedding</option>
-<option>Graduation</option>
-<option>Achievement</option>
-<option>New Baby</option>
-<option>Thanksgiving</option>
-<option>Other</option>
-
-</select>
-
-
-<label for="celebrating">
-  SELECT WHO YOU ARE CELEBRATING
-</label>
-
-<select
-  id="celebrating"
-  name="celebrating"
-  required
->
-
-<option value="">
-  Choose relationship
-</option>
-
-<option>Myself</option>
-<option>My Child</option>
-<option>My Parent</option>
-<option>My Spouse</option>
-<option>My Partner</option>
-<option>My Sibling</option>
-<option>My Friend</option>
-<option>My Colleague</option>
-<option>Family Member</option>
-<option>Other</option>
-
-</select>
-
-
-<label for="date">
-  DATE OF CELEBRATION
-</label>
-
-<input
-  id="date"
-  name="date"
-  type="date"
-  readonly
-  required
->
-
-<small id="dateNotice">
-  Your celebration will be booked for today.
-</small>
-
-
-<div class="payment-box">
-
-<span>
-  CELEBRATION PAYMENT
-</span>
-
-<strong>
-  ₦3,000
-</strong>
-
-</div>
-
-
-<button
-  type="submit"
-  id="payButton"
->
-  MAKE MY PAYMENT — ₦3,000
-</button>
-
-</form>
-
-
-<section
-  id="success"
-  class="success hidden"
->
-
-<h2>
-  CELEBRATION BOOKED!
-</h2>
-
-<div class="success-grid">
-
-<div>
-
-<span>
-  BOOKING NUMBER
-</span>
-
-<strong id="resultNumber">
-  —
-</strong>
-
-</div>
-
-
-<div>
-
-<span>
-  ON-AIR TIME
-</span>
-
-<strong id="resultTime">
-  —
-</strong>
-
-</div>
-
-</div>
-
-
-<button
-  type="button"
-  id="newBooking"
->
-  BOOK ANOTHER CELEBRATION
-</button>
-
-</section>
-
-</section>
-
-
-<footer>
-
-STAY TUNED IN AS WE MENTION YOUR NAME OR NAMES OF YOUR LOVED ONES
-
-</footer>
-
+  <a class="button secondary"
+     href="https://kulzzy.github.io/NAME-MENTIONING/admin.html">
+     ADMIN LOGIN
+  </a>
 </main>
 
+<footer>
+  KULZZY RADIO NETWORK · Celebrating Lives Everyday
+</footer>
 
 <script>
-
-(function(){
-
 "use strict";
 
+const API_BASE =
+  "https://kulzzy-backend-core-rywavs.v2.appdeploy.ai";
 
-/* ==================================================
-   KULZZY PAYMENT PAGE
-================================================== */
+const PAYMENT_PAGE =
+  "https://kulzzy.github.io/NAME-MENTIONING/payment.html";
 
-const PAYMENT_PAGE_URL =
-"https://kulzzy.github.io/NAME-MENTIONING/payment.html";
+const PRICE_NGN = 5000;
+const form = document.getElementById("bookingForm");
+const photoInput = document.getElementById("photos");
+const photoCount = document.getElementById("photoCount");
+const previews = document.getElementById("previews");
+const statusBox = document.getElementById("status");
+const submitBtn = document.getElementById("submitBtn");
 
+let chosenFiles = [];
 
-/* ==================================================
-   ELEMENTS
-================================================== */
-
-const form =
-document.getElementById("bookingForm");
-
-const message =
-document.getElementById("message");
-
-const payButton =
-document.getElementById("payButton");
-
-const dateInput =
-document.getElementById("date");
-
-const success =
-document.getElementById("success");
-
-const newBooking =
-document.getElementById("newBooking");
-
-const nameInput =
-document.getElementById("name");
-
-const celebrationType =
-document.getElementById("celebrationType");
-
-const celebrating =
-document.getElementById("celebrating");
-
-
-/* ==================================================
-   LAGOS TODAY
-================================================== */
-
-function lagosToday(){
-
-  return new Intl.DateTimeFormat(
-    "en-CA",
-    {
-      timeZone:"Africa/Lagos"
-    }
-  ).format(new Date());
-
+function setStatus(message, good = false) {
+  statusBox.textContent = message;
+  statusBox.className = good ? "good" : "bad";
 }
 
+photoInput.addEventListener("change", () => {
+  chosenFiles = Array.from(photoInput.files || []);
+  previews.replaceChildren();
 
-/* ==================================================
-   MESSAGE
-================================================== */
+  photoCount.textContent =
+    chosenFiles.length + " of 5 pictures selected.";
 
-function showMessage(text){
-
-  message.textContent =
-  text;
-
-  message.classList.remove(
-    "hidden"
-  );
-
-}
-
-
-function clearMessage(){
-
-  message.textContent =
-  "";
-
-  message.classList.add(
-    "hidden"
-  );
-
-}
-
-
-/* ==================================================
-   SET TODAY
-================================================== */
-
-function setToday(){
-
-  const today =
-  lagosToday();
-
-  dateInput.value =
-  today;
-
-  dateInput.min =
-  today;
-
-  dateInput.max =
-  today;
-
-}
-
-
-/* ==================================================
-   DATE PROTECTION
-================================================== */
-
-dateInput.addEventListener(
-  "change",
-  function(){
-
-    const today =
-    lagosToday();
-
-    if(
-      dateInput.value !== today
-    ){
-
-      dateInput.value =
-      today;
-
-      showMessage(
-        "Celebration bookings are accepted for today only."
-      );
-
-    }
-
+  if (chosenFiles.length !== 5) {
+    setStatus("Please select exactly five pictures.");
+  } else {
+    setStatus("");
   }
-);
 
+  chosenFiles.forEach((file, index) => {
+    const box = document.createElement("div");
+    box.className = "preview";
 
-/* ==================================================
-   SEND VALID BOOKING TO PAYMENT PAGE
-================================================== */
+    const img = document.createElement("img");
+    img.alt = "Selected picture " + (index + 1);
+    img.src = URL.createObjectURL(file);
 
-form.addEventListener(
-  "submit",
-  function(event){
+    const label = document.createElement("span");
+    label.textContent =
+      (index + 1) + ". " + file.name;
 
-    event.preventDefault();
-    event.stopPropagation();
+    box.append(img, label);
+    previews.append(box);
+  });
+});
 
-    clearMessage();
+function normalizeWhatsApp(value) {
+  return value.trim().replace(/[\s().-]/g, "");
+}
 
-    const today =
-    lagosToday();
+function validInternationalNumber(value) {
+  return /^\+[1-9]\d{7,14}$/.test(value);
+}
 
-    const name =
-    nameInput.value.trim();
+function loadImage(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const image = new Image();
 
-    const type =
-    celebrationType.value;
-
-    const relationship =
-    celebrating.value;
-
-    const date =
-    dateInput.value;
-
-
-    /* ==================================================
-       VALIDATION
-    ================================================== */
-
-    if(!name){
-
-      showMessage(
-        "Please enter the name to mention on-air."
-      );
-
-      nameInput.focus();
-
-      return;
-
-    }
-
-
-    if(!type){
-
-      showMessage(
-        "Please select a celebration type."
-      );
-
-      celebrationType.focus();
-
-      return;
-
-    }
-
-
-    if(!relationship){
-
-      showMessage(
-        "Please select who you are celebrating."
-      );
-
-      celebrating.focus();
-
-      return;
-
-    }
-
-
-    if(date !== today){
-
-      showMessage(
-        "Celebration bookings are accepted for today only."
-      );
-
-      setToday();
-
-      return;
-
-    }
-
-
-    /* ==================================================
-       PRESERVE BOOKING DETAILS FOR PAYMENT PAGE
-    ================================================== */
-
-    const bookingDetails = {
-      name: name,
-      celebrationType: type,
-      celebrating: relationship,
-      date: date,
-      amount: 3000,
-      purpose: "BOOK YOUR CELEBRATIONS"
+    image.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(image);
     };
 
-    try {
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Could not read one of the selected pictures."));
+    };
 
-      sessionStorage.setItem(
-        "kulzzyCelebrationBooking",
-        JSON.stringify(bookingDetails)
-      );
-
-    } catch(error) {
-
-      showMessage(
-        "Unable to prepare your booking. Please check your browser settings and try again."
-      );
-
-      return;
-
-    }
-
-
-    /* ==================================================
-       OPEN PAYMENT PAGE
-    ================================================== */
-
-    payButton.disabled =
-    true;
-
-    payButton.textContent =
-    "OPENING PAYMENT...";
-
-
-    const paymentUrl =
-    new URL(
-      PAYMENT_PAGE_URL
-    );
-
-
-    paymentUrl.searchParams.set(
-      "name",
-      name
-    );
-
-    paymentUrl.searchParams.set(
-      "celebrationType",
-      type
-    );
-
-    paymentUrl.searchParams.set(
-      "celebrating",
-      relationship
-    );
-
-    paymentUrl.searchParams.set(
-      "date",
-      date
-    );
-
-    paymentUrl.searchParams.set(
-      "amount",
-      "3000"
-    );
-
-    window.location.href =
-    paymentUrl.toString();
-
-  }
-);
-
-
-/* ==================================================
-   PAYMENT RETURN
-================================================== */
-
-function handlePaymentReturn(){
-
-  const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-
-  const payment =
-  params.get("payment");
-
-
-  /* SUCCESS */
-
-  if(
-    payment === "success"
-  ){
-
-    document.getElementById(
-      "resultNumber"
-    ).textContent =
-    params.get(
-      "bookingNumber"
-    ) || "—";
-
-
-    document.getElementById(
-      "resultTime"
-    ).textContent =
-    params.get(
-      "onAirTime"
-    ) || "—";
-
-
-    form.classList.add(
-      "hidden"
-    );
-
-
-    success.classList.remove(
-      "hidden"
-    );
-
-
-    history.replaceState(
-      {},
-      document.title,
-      window.location.pathname
-    );
-
-
-    return;
-
-  }
-
-
-  /* FAILED */
-
-  if(
-    payment === "failed"
-  ){
-
-    showMessage(
-      params.get("message") ||
-      "Payment was not completed. Please try again."
-    );
-
-
-    history.replaceState(
-      {},
-      document.title,
-      window.location.pathname
-    );
-
-  }
-
+    image.src = url;
+  });
 }
 
+function canvasToJpeg(canvas, quality) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(blob => {
+      if (!blob) {
+        reject(new Error("A picture could not be prepared."));
+        return;
+      }
+      resolve(blob);
+    }, "image/jpeg", quality);
+  });
+}
 
-/* ==================================================
-   BOOK ANOTHER CELEBRATION
-================================================== */
+async function preparePhoto(file) {
+  if (file.size > 12 * 1024 * 1024) {
+    throw new Error(file.name + " is larger than 12 MB.");
+  }
 
-newBooking.addEventListener(
-  "click",
-  function(){
+  if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+    throw new Error(file.name + " is not a supported image.");
+  }
 
-    form.classList.remove(
-      "hidden"
+  const image = await loadImage(file);
+  const maxDimension = 1600;
+  const scale = Math.min(
+    1,
+    maxDimension / Math.max(image.naturalWidth, image.naturalHeight)
+  );
+
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+  canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+  let quality = 0.82;
+  let blob = await canvasToJpeg(canvas, quality);
+
+  while (blob.size > 180 * 1024 && quality > 0.4) {
+    quality -= 0.1;
+    blob = await canvasToJpeg(canvas, quality);
+  }
+
+  if (blob.size > 300 * 1024) {
+    throw new Error(
+      "Could not reduce " + file.name +
+      " enough. Please select a smaller picture."
+    );
+  }
+
+  return await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({
+      filename: file.name.replace(/[^\w.-]/g, "_").slice(0, 100),
+      mimeType: "image/jpeg",
+      data: reader.result
+    });
+    reader.onerror = () =>
+      reject(new Error("Could not prepare " + file.name + "."));
+    reader.readAsDataURL(blob);
+  });
+}
+
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (chosenFiles.length !== 5) {
+    setStatus("You must select exactly five pictures.");
+    photoInput.focus();
+    return;
+  }
+
+  const whatsapp = normalizeWhatsApp(
+    document.getElementById("whatsapp").value
+  );
+
+  if (!validInternationalNumber(whatsapp)) {
+    setStatus(
+      "Enter a valid international number beginning with + and country code. " +
+      "Example: +2348012345678."
+    );
+    document.getElementById("whatsapp").focus();
+    return;
+  }
+
+  if (!form.reportValidity()) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "PREPARING YOUR BOOKING...";
+  setStatus("Preparing pictures. Please keep this page open.");
+
+  try {
+    const preparedPhotos = [];
+
+    for (const file of chosenFiles) {
+      preparedPhotos.push(await preparePhoto(file));
+    }
+
+    const booking = {
+      service: "ANNOUNCEMENT WITH AUDIOVISUAL",
+      amount: PRICE_NGN,
+      currency: "NGN",
+      customerName:
+        document.getElementById("customerName").value.trim(),
+      whatsapp,
+      celebrantName:
+        document.getElementById("celebrantName").value.trim(),
+      relationship:
+        document.getElementById("relationship").value.trim(),
+      wish: document.getElementById("wish").value.trim(),
+      photos: preparedPhotos
+    };
+
+    setStatus("Submitting your booking securely...");
+
+    const response = await fetch(
+      API_BASE + "/api/celebrations/bookings",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(booking)
+      }
     );
 
+    const result = await response.json().catch(() => ({}));
 
-    success.classList.add(
-      "hidden"
-    );
+    if (!response.ok) {
+      throw new Error(
+        result.error ||
+        result.message ||
+        "Booking submission failed. Please try again."
+      );
+    }
 
+    const bookingId =
+      result.bookingId ||
+      result.id ||
+      (result.booking && (result.booking.bookingId || result.booking.id));
 
-    form.reset();
+    if (!bookingId) {
+      throw new Error(
+        "The server did not return a booking reference. " +
+        "Contact Kulzzy Radio before submitting again."
+      );
+    }
 
+    sessionStorage.setItem("kulzzyAudiovisualBooking", JSON.stringify({
+      bookingId,
+      customerName: booking.customerName,
+      whatsapp: booking.whatsapp,
+      celebrantName: booking.celebrantName,
+      amount: PRICE_NGN,
+      service: booking.service
+    }));
 
-    setToday();
+    setStatus("Booking submitted. Opening the payment page...", true);
 
-
-    clearMessage();
-
-
-    document.querySelector(".card").scrollTo({
-      top:0,
-      behavior:"smooth"
+    const params = new URLSearchParams({
+      bookingId,
+      amount: String(PRICE_NGN),
+      service: booking.service
     });
 
+    window.location.href = PAYMENT_PAGE + "?" + params.toString();
+
+  } catch (error) {
+    setStatus(
+      (error.message || "Something went wrong.") +
+      "\n\nYour booking has not been confirmed on this page. " +
+      "Check your internet connection and try again."
+    );
+    submitBtn.disabled = false;
+    submitBtn.textContent = "SUBMIT BOOKING — ₦5,000";
   }
-);
-
-
-/* ==================================================
-   START
-================================================== */
-
-setToday();
-
-handlePaymentReturn();
-
-
-})();
-
+});
 </script>
-
 </body>
 </html>
