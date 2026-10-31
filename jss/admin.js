@@ -1,7 +1,7 @@
 "use strict";
 (function () {
 const firebaseConfig = {
-apiKey: "AIzaSyA5-6nRFImuPDe-KkKZV9d2zRpOICB_q9M",
+apiKey: "AIzaSyA5-6nRFImuPDe-KKkZV9d2zRpOICB_q9M",
 authDomain: "kulzzy-radio-app.firebaseapp.com",
 databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
 projectId: "kulzzy-radio-app",
@@ -64,7 +64,6 @@ if (dashboard.classList.contains("hidden")) {
   message.textContent = text;
   message.style.color = color;
 }
-
 }
 function setLoggedIn(value) {
 loginCard.classList.toggle("hidden", value);
@@ -83,7 +82,6 @@ refreshTimer = setInterval(function () {
     loadBookings();
   }
 }, 30000);
-
 }
 function addCell(row, value) {
 const cell = document.createElement("td");
@@ -91,10 +89,8 @@ cell.textContent =
   value === undefined || value === null || value === ""
     ? "—"
     : String(value);
-
 row.appendChild(cell);
 return cell;
-
 }
 function makeLink(url, label) {
 const link = document.createElement("a");
@@ -102,20 +98,16 @@ link.href = url;
 link.textContent = label;
 link.target = "_blank";
 link.rel = "noopener noreferrer";
-
 return link;
-
 }
 function formatDate(value) {
 if (value === undefined || value === null || value === "") {
 return "—";
 }
 const date = new Date(value);
-
 return Number.isNaN(date.getTime())
   ? String(value)
   : date.toLocaleString("en-NG");
-
 }
 function getPhotos(booking) {
 if (booking.photos && !Array.isArray(booking.photos)) {
@@ -127,13 +119,10 @@ booking.photos.photo2
 if (Array.isArray(booking.photos)) {
   return booking.photos;
 }
-
 if (Array.isArray(booking.images)) {
   return booking.images;
 }
-
 return [];
-
 }
 function getPhotoUrl(photo) {
 if (typeof photo === "string") {
@@ -142,7 +131,6 @@ return photo;
 if (!photo || typeof photo !== "object") {
   return "";
 }
-
 return (
   photo.signedUrl ||
   photo.signedURL ||
@@ -150,8 +138,95 @@ return (
   photo.downloadUrl ||
   ""
 );
-
 }
+
+/* ADDED: Download a celebration picture to the device */
+async function downloadPhoto(url, index, button) {
+if (!url) {
+  alert("The picture URL is unavailable.");
+  return;
+}
+
+const originalText = button.textContent;
+button.disabled = true;
+button.textContent = "PREPARING DOWNLOAD...";
+
+try {
+  let blob;
+
+  if (/^data:image\//i.test(url)) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Unable to read the picture.");
+    }
+    blob = await response.blob();
+  } else {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("The picture server did not allow downloading.");
+    }
+
+    blob = await response.blob();
+  }
+
+  if (!blob.type.startsWith("image/")) {
+    throw new Error("The file returned is not an image.");
+  }
+
+  const objectUrl = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = objectUrl;
+  link.download = "kulzzy-celebration-picture-" + index + ".jpg";
+  link.style.display = "none";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(function () {
+    URL.revokeObjectURL(objectUrl);
+  }, 2000);
+
+  button.textContent = "SAVED — DOWNLOAD AGAIN";
+
+} catch (error) {
+  console.error("Picture download failed:", error);
+
+  /* Fallback: open the original picture so it can be saved manually */
+  const fallback = document.createElement("a");
+  fallback.href = url;
+  fallback.target = "_blank";
+  fallback.rel = "noopener noreferrer";
+  fallback.style.display = "none";
+
+  document.body.appendChild(fallback);
+  fallback.click();
+  fallback.remove();
+
+  alert(
+    "Automatic download was blocked by the picture host. " +
+    "The picture has been opened in a new tab. " +
+    "Use your device's Download or Save Image option to save it."
+  );
+
+  button.textContent = "TRY DOWNLOAD AGAIN";
+} finally {
+  button.disabled = false;
+  if (button.textContent === "PREPARING DOWNLOAD...") {
+    button.textContent = originalText;
+  }
+}
+
+/* Restore the normal button label after a successful download */
+if (button.textContent === "SAVED — DOWNLOAD AGAIN") {
+  setTimeout(function () {
+    button.textContent = originalText;
+  }, 2500);
+}
+}
+
 function addPhotos(cell, booking) {
 cell.className = "photo-links";
 const photos = getPhotos(booking);
@@ -188,20 +263,32 @@ photos.forEach(function (photo, index) {
     makeLink(url, "Open picture " + (index + 1))
   );
 
+  /* ADDED: Save button directly below each picture link */
+  const downloadButton = document.createElement("button");
+  downloadButton.type = "button";
+  downloadButton.textContent = "⬇ SAVE PICTURE";
+  downloadButton.style.cssText =
+    "display:block;margin:6px 0 12px;padding:10px 12px;" +
+    "background:#ffd700;color:#06122a;border:0;border-radius:6px;" +
+    "font-weight:bold;cursor:pointer;";
+
+  downloadButton.addEventListener("click", function () {
+    downloadPhoto(url, index + 1, downloadButton);
+  });
+
+  cell.appendChild(downloadButton);
   cell.appendChild(document.createElement("br"));
 });
 
 if (!cell.hasChildNodes()) {
   cell.textContent = "Picture data unavailable";
 }
-
 }
 function renderBookings(bookings) {
 rows.replaceChildren();
 if (!bookings.length) {
   const row = document.createElement("tr");
   const cell = addCell(row, "No bookings found.");
-
   cell.colSpan = 10;
   rows.appendChild(row);
   return;
@@ -313,7 +400,6 @@ bookings.forEach(function (booking) {
   row.appendChild(statusCell);
   rows.appendChild(row);
 });
-
 }
 function friendlyFirebaseError(error) {
 const code = error && error.code ? error.code : "";
@@ -360,7 +446,6 @@ return (
     ? error.message
     : "An unknown error occurred.")
 );
-
 }
 function signInWithTimeout(email, password) {
 return new Promise(function (resolve, reject) {
@@ -400,7 +485,6 @@ let finished = false;
       reject(error);
     });
 });
-
 }
 async function loadBookings() {
 if (loading) {
@@ -459,7 +543,6 @@ try {
   loading = false;
   refreshBtn.disabled = false;
 }
-
 }
 async function logout() {
 stopAutoRefresh();
@@ -474,7 +557,6 @@ setLoggedIn(false);
 
 loginMessage.textContent = "You have been logged out.";
 loginMessage.style.color = "#6ee7a0";
-
 }
 async function init() {
 if (!window.firebase) {
@@ -574,7 +656,6 @@ try {
     true
   );
 }
-
 }
 init();
 })();
