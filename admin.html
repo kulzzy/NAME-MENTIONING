@@ -1,153 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#06122a">
-<title>Celebration Booking Admin | Kulzzy Radio</title>
-
-<style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: #06122a;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-header {
-  background: #0d1c39;
-  border-bottom: 2px solid #ffd700;
-  padding: 20px 15px;
-  text-align: center;
-}
-header h1 { color: #ffd700; font-size: 24px; }
-main { max-width: 1100px; margin: auto; padding: 15px; }
-.card {
-  background: #0d1c39;
-  border: 1px solid #314568;
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 16px;
-}
-h2 { color: #ffd700; font-size: 20px; }
-label { display: block; margin: 12px 0 7px; font-weight: bold; }
-input {
-  width: 100%;
-  padding: 13px;
-  border-radius: 8px;
-  border: 1px solid #50617d;
-  background: #06122a;
-  color: white;
-  font-size: 16px;
-}
-button {
-  padding: 12px 15px;
-  border: 0;
-  border-radius: 8px;
-  background: #ffd700;
-  color: #06122a;
-  font-weight: 900;
-  cursor: pointer;
-}
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-.actions button { flex: 1; }
-#logoutBtn { background: #8e2935; color: white; }
-#message { white-space: pre-wrap; line-height: 1.6; }
-.muted { color: #cbd5e1; font-size: 13px; line-height: 1.6; }
-.table-wrap { overflow-x: auto; }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  min-width: 850px;
-  font-size: 14px;
-}
-th, td {
-  border-bottom: 1px solid #314568;
-  padding: 12px 10px;
-  text-align: left;
-  vertical-align: top;
-}
-th { color: #ffd700; }
-td { overflow-wrap: anywhere; }
-a { color: #ffd700; }
-.photo-links a { display: inline-block; margin: 4px; }
-.hidden { display: none !important; }
-</style>
-</head>
-
-<body>
-<header>
+<title>Celebration Booking Admin | Kulzzy Radio</title><style>
+*{box-sizing:border-box}
+body{margin:0;background:#06122a;color:white;font-family:Arial,Helvetica,sans-serif}
+header{background:#0d1c39;border-bottom:2px solid #ffd700;padding:20px 15px;text-align:center}
+header h1{color:#ffd700;font-size:24px;margin:0 0 8px}
+main{max-width:1100px;margin:auto;padding:15px}
+.card{background:#0d1c39;border:1px solid #314568;border-radius:14px;padding:18px;margin-bottom:16px}
+h2{color:#ffd700;font-size:20px}
+label{display:block;margin:12px 0 7px;font-weight:bold}
+input{width:100%;padding:13px;border-radius:8px;border:1px solid #50617d;background:#06122a;color:white;font-size:16px}
+button{padding:12px 15px;border:0;border-radius:8px;background:#ffd700;color:#06122a;font-weight:900;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.actions button{flex:1}
+#logoutBtn{background:#8e2935;color:white}
+#message{white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere}
+.muted{color:#cbd5e1;font-size:13px;line-height:1.6}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:1050px;font-size:14px}
+th,td{border-bottom:1px solid #314568;padding:12px 10px;text-align:left;vertical-align:top}
+th{color:#ffd700}
+td{overflow-wrap:anywhere}
+a{color:#ffd700}
+.photo-links a{display:inline-block;margin:4px}
+.photo-thumb{display:block;width:90px;max-height:100px;object-fit:contain;margin:5px 0;border:1px solid #50617d;border-radius:5px}
+.paid{color:#6ee7a0;font-weight:bold}
+.pending{color:#ffcf70;font-weight:bold}
+.hidden{display:none!important}
+.status-button{display:block;margin-top:8px;font-size:12px;padding:9px}
+@media(max-width:600px){header h1{font-size:20px}main{padding:10px}.card{padding:13px}}
+</style></head>
+<body><header>
   <h1>KULZZY RADIO NETWORK</h1>
   <div>ANNOUNCEMENT WITH AUDIOVISUAL — ADMIN PANEL</div>
-</header>
-
-<main>
+</header><main>
   <section class="card" id="loginCard">
     <h2>Administrator Login</h2>
-    <p class="muted">
-      This area is for authorised Kulzzy Radio administrators only.
-    </p>
+    <p class="muted">Authorised Kulzzy Radio administrator access only.</p><form id="loginForm">
+  <label for="adminEmail">Administrator Email</label>
+  <input id="adminEmail" type="email" autocomplete="username" required>
 
-    <form id="loginForm">
-      <label for="adminPassword">Admin Password</label>
-      <input id="adminPassword" type="password"
-        autocomplete="current-password" required>
+  <label for="adminPassword">Administrator Password</label>
+  <input id="adminPassword" type="password" autocomplete="current-password" required>
 
-      <div class="actions">
-        <button type="submit" id="loginBtn">SIGN IN</button>
-      </div>
-    </form>
-  </section>
+  <div class="actions">
+    <button type="submit" id="loginBtn">SIGN IN</button>
+  </div>
+</form>
 
-  <section class="card hidden" id="dashboard">
+  </section>  <section class="card hidden" id="dashboard">
     <h2>Celebration Bookings</h2>
-
     <p class="muted">
-      The booking list refreshes automatically. A booking's existence does
-      not prove payment has been received. Confirm payments independently
-      before marking a customer as paid.
-    </p>
+      Bookings refresh automatically. Confirm receipt of payment independently
+      before marking a booking as PAID. The status button changes only the
+      booking's payment status.
+    </p><div class="actions">
+  <button id="refreshBtn" type="button">REFRESH BOOKINGS</button>
+  <button id="logoutBtn" type="button">LOG OUT</button>
+</div>
 
-    <div class="actions">
-      <button id="refreshBtn" type="button">REFRESH BOOKINGS</button>
-      <button id="logoutBtn" type="button">LOG OUT</button>
-    </div>
+<p id="message" role="status" aria-live="polite"></p>
 
-    <p id="message" role="status" aria-live="polite"></p>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Booking / Dates</th>
+        <th>Reference</th>
+        <th>Customer</th>
+        <th>WhatsApp</th>
+        <th>Celebrant</th>
+        <th>Relationship</th>
+        <th>Message</th>
+        <th>Pictures</th>
+        <th>Amount</th>
+        <th>Payment Status</th>
+      </tr>
+    </thead>
+    <tbody id="bookingRows">
+      <tr><td colspan="10">Sign in to view bookings.</td></tr>
+    </tbody>
+  </table>
+</div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Reference</th>
-            <th>Customer</th>
-            <th>WhatsApp</th>
-            <th>Celebrant</th>
-            <th>Relationship</th>
-            <th>Message</th>
-            <th>Pictures</th>
-            <th>Amount</th>
-            <th>Payment Status</th>
-          </tr>
-        </thead>
-        <tbody id="bookingRows">
-          <tr><td colspan="10">Sign in to view bookings.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <p class="muted">
-    Kulzzy Radio Network · Authorised administration only.
-  </p>
-</main>
-
-<script src="jss/admin.js"></script>
-</body>
+  </section>  <p class="muted">Kulzzy Radio Network · Authorised administration only.</p>
+</main><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script><script src="jss/admin.js"></script></body>
 </html>
