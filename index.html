@@ -220,7 +220,7 @@
 
     .photo-preview {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
       margin-top: 12px;
     }
@@ -344,12 +344,12 @@
 
     <section class="price-card">
       <div class="price-label">Announcement With Audiovisual</div>
-      <div class="price">₦5,000</div>
-      <div class="price-note">One booking · Five pictures required</div>
+      <div class="price">₦10,000</div>
+      <div class="price-note">One booking · Two pictures required</div>
     </section>
 
     <section class="currency-card">
-      <h2>₦5,000 — International Currency Guide</h2>
+      <h2>₦10,000 — International Currency Guide</h2>
 
       <p class="currency-intro">
         Approximate equivalents for international visitors.
@@ -358,58 +358,58 @@
       <div class="currency-grid">
         <div class="currency-item">
           <span class="currency-name">🇳🇬 Nigerian Naira (NGN)</span>
-          <span class="currency-value">₦5,000</span>
+          <span class="currency-value">₦10,000</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇺🇸 US Dollar (USD)</span>
-          <span class="currency-value">≈ $3.50</span>
+          <span class="currency-value">≈ $6.50</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇬🇧 British Pound (GBP)</span>
-          <span class="currency-value">≈ £2.60</span>
+          <span class="currency-value">≈ £4.90</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇪🇺 Euro (EUR)</span>
-          <span class="currency-value">≈ €3.00</span>
+          <span class="currency-value">≈ €5.70</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇨🇦 Canadian Dollar (CAD)</span>
-          <span class="currency-value">≈ C$4.80</span>
+          <span class="currency-value">≈ C$9.10</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇦🇺 Australian Dollar (AUD)</span>
-          <span class="currency-value">≈ A$5.30</span>
+          <span class="currency-value">≈ A$10.00</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇿🇦 South African Rand (ZAR)</span>
-          <span class="currency-value">≈ R60</span>
+          <span class="currency-value">≈ R115</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇬🇭 Ghanaian Cedi (GHS)</span>
-          <span class="currency-value">≈ GH₵40</span>
+          <span class="currency-value">≈ GH₵95</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇰🇪 Kenyan Shilling (KES)</span>
-          <span class="currency-value">≈ KSh450</span>
+          <span class="currency-value">≈ KSh900</span>
         </div>
 
         <div class="currency-item">
           <span class="currency-name">🇮🇳 Indian Rupee (INR)</span>
-          <span class="currency-value">≈ ₹300</span>
+          <span class="currency-value">≈ ₹550</span>
         </div>
       </div>
 
       <p class="currency-disclaimer">
         These figures are estimates, not live exchange rates. Actual rates
-        and payment charges may vary. The booking price is ₦5,000.
+        and payment charges may vary. The booking price is ₦10,000.
       </p>
     </section>
 
@@ -417,7 +417,7 @@
       <h2>Book Your Celebration</h2>
 
       <p class="form-description">
-        Complete the required details and upload exactly five pictures.
+        Complete the required details and upload exactly two pictures.
       </p>
 
       <form id="bookingForm">
@@ -506,7 +506,7 @@
 
         <div class="field">
           <label for="photos">
-            Upload Exactly 5 Pictures <span class="required">*</span>
+            Upload Exactly 2 Pictures <span class="required">*</span>
           </label>
 
           <input
@@ -518,22 +518,22 @@
           >
 
           <small class="help">
-            Select five pictures. Large images are automatically resized
-            and compressed before upload.
+            Select exactly two pictures. Large images are automatically
+            resized and compressed before upload.
           </small>
 
           <div id="photoPreview" class="photo-preview"></div>
         </div>
 
         <div class="notice">
-          <strong>Booking price: ₦5,000.</strong>
-          Your booking details and pictures must be saved before the payment
-          page opens. Payment must be confirmed before the announcement is
-          treated as paid.
+          <strong>Booking price: ₦10,000.</strong>
+          Your booking details and pictures must be saved before the
+          payment page opens. Payment must be confirmed before the
+          announcement is treated as paid.
         </div>
 
         <button id="submitButton" class="submit-button" type="submit">
-          MAKE PAYMENT NOW — ₦5,000
+          MAKE PAYMENT NOW — ₦10,000
         </button>
 
         <div
@@ -558,17 +558,34 @@
     const API_BASE =
       "https://kulzzy-backend-core-rywavs.v2.appdeploy.ai";
 
-    const SELAR_CHECKOUT_URL =
-      "https://selar.com/5772b1677z?add_to_cart=1";
+    /*
+      Connect payment to Kulzzy Payment Core on GitHub.
+      The amount and payment purpose are passed to Payment Core.
+      The customer is returned to this page after payment.
+    */
+    const PAYMENT_CORE_URL =
+      "https://kulzzy.github.io/KULZZY-PAYMENT-CORE/";
 
-    const REQUIRED_PHOTOS = 5;
+    const BOOKING_AMOUNT = 10000;
+    const PAYMENT_PURPOSE = "BOOK YOUR CELEBRATIONS";
+    const PAYMENT_PRODUCT = "Announcement With Audiovisual";
+
+    function buildPaymentUrl() {
+      const params = new URLSearchParams({
+        amount: String(BOOKING_AMOUNT),
+        purpose: PAYMENT_PURPOSE,
+        product: PAYMENT_PRODUCT,
+        return: window.location.href
+      });
+
+      return `${PAYMENT_CORE_URL}?${params.toString()}`;
+    }
+
+    const REQUIRED_PHOTOS = 2;
 
     /*
-      The backend has a limit of 180 KB per picture and 800 KB
-      for all five pictures combined.
-
-      We use smaller targets to leave room for base64 encoding
-      and the request payload.
+      Keep the existing backend payload limits.
+      Pictures are compressed before they are sent.
     */
     const MAX_PHOTO_BYTES = 120 * 1024;
     const MAX_TOTAL_BYTES = 650 * 1024;
@@ -606,16 +623,16 @@
 
     /*
       Try several browser-supported methods to decode an image.
-
-      Object URLs are attempted before converting the original file
-      to a large base64 string. This helps on Android phones.
     */
     async function decodeImageFile(file) {
       if ("createImageBitmap" in window) {
         try {
           return await createImageBitmap(file);
         } catch (error) {
-          console.warn("createImageBitmap failed; trying Image element.", error);
+          console.warn(
+            "createImageBitmap failed; trying Image element.",
+            error
+          );
         }
       }
 
@@ -634,10 +651,6 @@
           element.src = objectURL;
         });
 
-        /*
-          The image has loaded. The URL can now be released because
-          the browser has decoded the image into memory.
-        */
         URL.revokeObjectURL(objectURL);
 
         return image;
@@ -646,9 +659,6 @@
         URL.revokeObjectURL(objectURL);
       }
 
-      /*
-        Final fallback: try reading the image as a data URL.
-      */
       const dataURL = await readFileAsDataURL(file);
 
       return await new Promise((resolve, reject) => {
@@ -672,7 +682,9 @@
           if (blob) {
             resolve(blob);
           } else {
-            reject(new Error("Your browser could not compress this picture."));
+            reject(
+              new Error("Your browser could not compress this picture.")
+            );
           }
         }, "image/jpeg", quality);
       });
@@ -690,10 +702,7 @@
     }
 
     /*
-      Compresses images of different original file sizes.
-
-      It progressively reduces quality and image dimensions until
-      the picture is small enough for the existing backend limits.
+      Compress each picture to fit the existing backend limits.
     */
     async function compressImage(file) {
       let image;
@@ -726,7 +735,9 @@
       if (!context) {
         if (typeof image.close === "function") image.close();
 
-        throw new Error("Your browser cannot compress pictures on this device.");
+        throw new Error(
+          "Your browser cannot compress pictures on this device."
+        );
       }
 
       let scale = Math.min(
@@ -736,10 +747,6 @@
 
       let bestBlob = null;
 
-      /*
-        Multiple passes support very large phone-camera photos.
-        If quality reduction is insufficient, dimensions are reduced too.
-      */
       for (let dimensionPass = 0; dimensionPass < 12; dimensionPass++) {
         canvas.width = Math.max(1, Math.round(originalWidth * scale));
         canvas.height = Math.max(1, Math.round(originalHeight * scale));
@@ -756,7 +763,10 @@
           canvas.height
         );
 
-        for (const quality of [0.86, 0.76, 0.66, 0.56, 0.46, 0.36, 0.28, 0.20]) {
+        for (const quality of [
+          0.86, 0.76, 0.66, 0.56,
+          0.46, 0.36, 0.28, 0.20
+        ]) {
           const blob = await canvasToBlob(canvas, quality);
 
           bestBlob = blob;
@@ -774,10 +784,6 @@
           }
         }
 
-        /*
-          The image is still too large. Reduce its dimensions and
-          try the compression passes again.
-        */
         scale *= 0.75;
       }
 
@@ -799,8 +805,8 @@
     }
 
     /*
-      Preview selected images. A preview failure does not stop the
-      compression routine from trying to read the actual file.
+      Preview the selected pictures.
+      Exactly two pictures are required.
     */
     photoInput.addEventListener("change", () => {
       preview.replaceChildren();
@@ -809,7 +815,7 @@
 
       if (files.length !== REQUIRED_PHOTOS) {
         showStatus(
-          `Please select exactly five pictures. You selected ${files.length}.`,
+          `Please select exactly two pictures. You selected ${files.length}.`,
           "error"
         );
 
@@ -827,9 +833,12 @@
         image.src = url;
 
         image.onload = () => URL.revokeObjectURL(url);
+
         image.onerror = () => {
           URL.revokeObjectURL(url);
-          image.alt = "Preview unavailable; the upload process will still try to process this picture.";
+
+          image.alt =
+            "Preview unavailable; the upload process will still try to process this picture.";
         };
 
         preview.appendChild(image);
@@ -837,7 +846,9 @@
     });
 
     /*
-      Save booking details and then open the configured Selar checkout.
+      Save the booking through the existing Backend Core endpoint.
+      After the server confirms that the booking was saved,
+      open Kulzzy Payment Core with the ₦10,000 payment details.
     */
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -867,7 +878,11 @@
         !relationship ||
         !celebrationDate
       ) {
-        showStatus("Please complete all required fields.", "error");
+        showStatus(
+          "Please complete all required fields.",
+          "error"
+        );
+
         return;
       }
 
@@ -881,7 +896,11 @@
       }
 
       if (files.length !== REQUIRED_PHOTOS) {
-        showStatus("Please select exactly five pictures.", "error");
+        showStatus(
+          "Please select exactly two pictures.",
+          "error"
+        );
+
         return;
       }
 
@@ -904,10 +923,14 @@
 
         if (totalBytes > MAX_TOTAL_BYTES) {
           throw new Error(
-            "The five compressed pictures are still too large together. Please select different pictures and try again."
+            "The two compressed pictures are still too large together. Please select different pictures and try again."
           );
         }
 
+        /*
+          Keep the existing payload field names so the current
+          booking/admin integration can continue using this data.
+        */
         const payload = {
           name: customerName,
           celebrationType: "ANNOUNCEMENT WITH AUDIOVISUAL",
@@ -970,23 +993,25 @@
         }
 
         showStatus(
-          "Your booking details and pictures have been saved. Opening Selar checkout...",
+          "Your booking details and two pictures have been saved. Opening Kulzzy Payment Core...",
           "success"
         );
 
         button.textContent = "OPENING PAYMENT...";
 
         /*
-          Use the exact existing checkout link. Do not mark the
-          booking as paid just because the checkout page opens.
+          Send the customer to the GitHub-hosted Payment Core.
+          Payment completion must be confirmed by the payment system.
+          Opening checkout does not mean the booking is paid.
         */
-        window.location.href = SELAR_CHECKOUT_URL;
+        window.location.href = buildPaymentUrl();
 
       } catch (error) {
         console.error("Booking/payment error:", error);
 
         let message =
-          error.message || "Something went wrong. Please try again.";
+          error.message ||
+          "Something went wrong. Please try again.";
 
         if (
           error instanceof TypeError &&
@@ -999,7 +1024,7 @@
         showStatus(message, "error");
 
         button.disabled = false;
-        button.textContent = "MAKE PAYMENT NOW — ₦5,000";
+        button.textContent = "MAKE PAYMENT NOW — ₦10,000";
       }
     });
   </script>
