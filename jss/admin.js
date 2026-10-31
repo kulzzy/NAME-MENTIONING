@@ -1,7 +1,7 @@
 "use strict";
 (function () {
 const firebaseConfig = {
-apiKey: "AIzaSyA5-6nRFImuPDe-KkKZV9d2zRpOICB_q9M",
+apiKey: "AIzaSyA5-6nRFImuPDe-KKZV9d2zRpOICB_q9M",
 authDomain: "kulzzy-radio-app.firebaseapp.com",
 databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
 projectId: "kulzzy-radio-app",
@@ -24,20 +24,11 @@ const rows = document.getElementById("bookingRows");
 const refreshBtn = document.getElementById("refreshBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 if (
-!loginCard ||
-!dashboard ||
-!loginForm ||
-!loginBtn ||
-!emailInput ||
-!passwordInput ||
-!message ||
-!rows ||
-!refreshBtn ||
-!logoutBtn
+!loginCard || !dashboard || !loginForm || !loginBtn ||
+!emailInput || !passwordInput || !message || !rows ||
+!refreshBtn || !logoutBtn
 ) {
-console.error(
-"Admin panel HTML is missing one or more required element IDs."
-);
+console.error("Admin panel HTML is missing required element IDs.");
 return;
 }
 let loginMessage = document.getElementById("loginMessage");
@@ -71,9 +62,7 @@ loginCard.classList.toggle("hidden", value);
 dashboard.classList.toggle("hidden", !value);
 }
 function stopAutoRefresh() {
-if (refreshTimer) {
-clearInterval(refreshTimer);
-}
+if (refreshTimer) clearInterval(refreshTimer);
 refreshTimer = null;
 }
 function startAutoRefresh() {
@@ -102,9 +91,7 @@ link.href = url;
 link.textContent = label;
 link.target = "_blank";
 link.rel = "noopener noreferrer";
-
 return link;
-
 }
 function formatDate(value) {
 if (value === undefined || value === null || value === "") {
@@ -124,25 +111,15 @@ booking.photos.photo1,
 booking.photos.photo2
 ].filter(Boolean);
 }
-if (Array.isArray(booking.photos)) {
-  return booking.photos;
-}
-
-if (Array.isArray(booking.images)) {
-  return booking.images;
-}
+if (Array.isArray(booking.photos)) return booking.photos;
+if (Array.isArray(booking.images)) return booking.images;
 
 return [];
 
 }
 function getPhotoUrl(photo) {
-if (typeof photo === "string") {
-return photo;
-}
-if (!photo || typeof photo !== "object") {
-  return "";
-}
-
+if (typeof photo === "string") return photo;
+if (!photo || typeof photo !== "object") return "";
 return (
   photo.signedUrl ||
   photo.signedURL ||
@@ -150,6 +127,142 @@ return (
   photo.downloadUrl ||
   ""
 );
+
+}
+function getFileExtension(url, contentType) {
+const type = String(contentType || "").toLowerCase();
+if (type.includes("png")) return "png";
+if (type.includes("webp")) return "webp";
+if (type.includes("gif")) return "gif";
+if (type.includes("jpeg") || type.includes("jpg")) return "jpg";
+
+const dataMatch = String(url).match(/^data:image\/([^;,]+)/i);
+
+if (dataMatch) {
+  const format = dataMatch[1].toLowerCase();
+  if (format === "jpeg") return "jpg";
+  if (["png", "webp", "gif"].includes(format)) return format;
+}
+
+try {
+  const pathname = new URL(url, window.location.href).pathname;
+  const match = pathname.match(/\.([a-z0-9]{3,5})$/i);
+
+  if (match && ["jpg", "jpeg", "png", "webp", "gif"].includes(match[1].toLowerCase())) {
+    return match[1].toLowerCase() === "jpeg"
+      ? "jpg"
+      : match[1].toLowerCase();
+  }
+} catch (_) {}
+
+return "jpg";
+
+}
+function triggerDownload(blob, filename) {
+const objectUrl = URL.createObjectURL(blob);
+const link = document.createElement("a");
+link.href = objectUrl;
+link.download = filename;
+link.style.display = "none";
+
+document.body.appendChild(link);
+link.click();
+link.remove();
+
+setTimeout(function () {
+  URL.revokeObjectURL(objectUrl);
+}, 60000);
+
+}
+async function downloadPhoto(url, index, button) {
+if (!url) {
+showMessage("This picture does not have a valid image URL.", true);
+return;
+}
+const originalText = button.textContent;
+button.disabled = true;
+button.textContent = "PREPARING DOWNLOAD...";
+
+try {
+  const filename =
+    "Kulzzy-Radio-Celebration-Picture-" +
+    index +
+    "." +
+    getFileExtension(url);
+
+  if (/^data:image\//i.test(url)) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    triggerDownload(
+      blob,
+      "Kulzzy-Radio-Celebration-Picture-" +
+        index +
+        "." +
+        getFileExtension(url, blob.type)
+    );
+
+    showMessage("Picture download started: " + filename);
+    return;
+  }
+
+  if (!/^https?:\/\//i.test(url)) {
+    throw new Error("This picture URL is not supported for downloading.");
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(function () {
+    controller.abort();
+  }, 20000);
+
+  let response;
+
+  try {
+    response = await fetch(url, {
+      mode: "cors",
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
+
+  if (!response.ok) {
+    throw new Error("The picture server returned HTTP " + response.status + ".");
+  }
+
+  const blob = await response.blob();
+
+  if (!blob.size) {
+    throw new Error("The downloaded picture file is empty.");
+  }
+
+  triggerDownload(
+    blob,
+    "Kulzzy-Radio-Celebration-Picture-" +
+      index +
+      "." +
+      getFileExtension(url, blob.type)
+  );
+
+  showMessage("Picture download started. Check your Downloads folder.");
+} catch (error) {
+  console.warn("Direct picture download failed:", error);
+
+  showMessage(
+    "The website hosting this picture blocked direct downloading, or the connection failed. " +
+    "The picture will open in a new tab so you can use your browser's Save Image or Download option.",
+    true
+  );
+
+  const fallback = document.createElement("a");
+  fallback.href = url;
+  fallback.target = "_blank";
+  fallback.rel = "noopener noreferrer";
+  fallback.click();
+} finally {
+  button.disabled = false;
+  button.textContent = originalText;
+}
 
 }
 function addPhotos(cell, booking) {
@@ -164,16 +277,18 @@ if (!photos.length) {
 photos.forEach(function (photo, index) {
   const url = getPhotoUrl(photo);
 
-  if (!url) {
-    return;
-  }
+  if (!url) return;
+
+  const wrapper = document.createElement("div");
+  wrapper.style.cssText =
+    "margin:8px 0 14px;padding:8px;border:1px solid #d6b84a;border-radius:8px;max-width:180px;";
 
   if (/^(https?:\/\/|data:image\/)/i.test(url)) {
     const img = document.createElement("img");
 
     img.alt = "Celebration picture " + (index + 1);
     img.style.cssText =
-      "display:block;width:90px;max-height:100px;object-fit:contain;margin:5px 0;";
+      "display:block;width:100%;max-width:160px;max-height:160px;object-fit:contain;margin:0 auto 8px;";
     img.src = url;
 
     img.onerror = function () {
@@ -181,14 +296,27 @@ photos.forEach(function (photo, index) {
       img.style.display = "none";
     };
 
-    cell.appendChild(img);
+    wrapper.appendChild(img);
   }
 
-  cell.appendChild(
-    makeLink(url, "Open picture " + (index + 1))
-  );
+  const saveButton = document.createElement("button");
+  saveButton.type = "button";
+  saveButton.textContent = "⬇ SAVE PICTURE";
+  saveButton.style.cssText =
+    "display:block;width:100%;margin:6px 0;padding:10px 8px;background:#ffd700;color:#06122a;border:0;border-radius:6px;font-weight:bold;cursor:pointer;";
 
-  cell.appendChild(document.createElement("br"));
+  saveButton.addEventListener("click", function () {
+    downloadPhoto(url, index + 1, saveButton);
+  });
+
+  wrapper.appendChild(saveButton);
+
+  const openLink = makeLink(url, "OPEN PICTURE");
+  openLink.style.cssText =
+    "display:block;text-align:center;margin-top:8px;overflow-wrap:anywhere;";
+
+  wrapper.appendChild(openLink);
+  cell.appendChild(wrapper);
 });
 
 if (!cell.hasChildNodes()) {
@@ -201,7 +329,6 @@ rows.replaceChildren();
 if (!bookings.length) {
   const row = document.createElement("tr");
   const cell = addCell(row, "No bookings found.");
-
   cell.colSpan = 10;
   rows.appendChild(row);
   return;
@@ -209,7 +336,6 @@ if (!bookings.length) {
 
 bookings.forEach(function (booking) {
   const row = document.createElement("tr");
-
   const dateCell = document.createElement("td");
 
   dateCell.textContent =
@@ -243,7 +369,6 @@ bookings.forEach(function (booking) {
   addCell(row, booking.wish || booking.message || "—");
 
   const photoCell = document.createElement("td");
-
   addPhotos(photoCell, booking);
   row.appendChild(photoCell);
 
@@ -252,9 +377,8 @@ bookings.forEach(function (booking) {
   addCell(
     row,
     "₦" +
-      (
-        Number.isFinite(amount) ? amount : 10000
-      ).toLocaleString("en-NG")
+      (Number.isFinite(amount) ? amount : 10000)
+        .toLocaleString("en-NG")
   );
 
   const statusCell = document.createElement("td");
@@ -263,7 +387,6 @@ bookings.forEach(function (booking) {
   ).toLowerCase();
 
   const statusText = document.createElement("strong");
-
   statusText.textContent = status.toUpperCase();
   statusText.style.color =
     status === "paid" ? "#6ee7a0" : "#ffcf70";
@@ -279,11 +402,9 @@ bookings.forEach(function (booking) {
       "display:block;margin-top:8px;padding:9px;font-size:12px;";
 
     paidButton.addEventListener("click", async function () {
-      if (
-        !window.confirm(
-          "Have you independently confirmed receipt of ₦10,000 for this booking?"
-        )
-      ) {
+      if (!window.confirm(
+        "Have you independently confirmed receipt of ₦10,000 for this booking?"
+      )) {
         return;
       }
 
@@ -318,41 +439,38 @@ bookings.forEach(function (booking) {
 function friendlyFirebaseError(error) {
 const code = error && error.code ? error.code : "";
 const messages = {
-"auth/invalid-credential":
-"The email or password was not accepted. Check the Firebase account credentials.",
-"auth/invalid-login-credentials":
-"The email or password was not accepted. Check the Firebase account credentials.",
-"auth/user-not-found":
-"No Firebase user was found for this email.",
-"auth/wrong-password":
-"The password was not accepted.",
-"auth/too-many-requests":
-"Too many failed attempts. Wait before trying again.",
-"auth/operation-not-allowed":
-"Email/Password sign-in is not enabled in Firebase Authentication.",
-"auth/network-request-failed":
-"The network request failed. Check your internet connection.",
-"auth/unauthorized-domain":
-"This website is not authorised in Firebase. Add kulzzy.github.io under Firebase Authentication → Settings → Authorized domains.",
-"auth/invalid-api-key":
-"Firebase rejected the API key. Check the Firebase configuration.",
-"auth/app-not-authorized":
-"This website is not authorised to use this Firebase project.",
-"PERMISSION_DENIED":
-"Firebase denied access. Check the published Realtime Database rules."
+  "auth/invalid-credential":
+    "The email or password was not accepted. Check the Firebase account credentials.",
+  "auth/invalid-login-credentials":
+    "The email or password was not accepted. Check the Firebase account credentials.",
+  "auth/user-not-found":
+    "No Firebase user was found for this email.",
+  "auth/wrong-password":
+    "The password was not accepted.",
+  "auth/too-many-requests":
+    "Too many failed attempts. Wait before trying again.",
+  "auth/operation-not-allowed":
+    "Email/Password sign-in is not enabled in Firebase Authentication.",
+  "auth/network-request-failed":
+    "The network request failed. Check your internet connection.",
+  "auth/unauthorized-domain":
+    "Add kulzzy.github.io under Firebase Authentication → Settings → Authorized domains.",
+  "auth/invalid-api-key":
+    "Firebase rejected the API key. Check the Firebase configuration.",
+  "auth/app-not-authorized":
+    "This website is not authorised to use this Firebase project.",
+  "PERMISSION_DENIED":
+    "Firebase denied access. Check the published Realtime Database rules."
 };
+
 if (error && error.code === "LOGIN_TIMEOUT") {
   return (
-    "Firebase did not respond within 15 seconds.\n" +
-    "Check your internet connection and Firebase Authentication settings. " +
-    "If this repeats, verify that Email/Password sign-in is enabled and " +
-    "kulzzy.github.io is listed under Authorized domains."
+    "Firebase did not respond within 15 seconds. Check your connection " +
+    "and Firebase Authentication settings."
   );
 }
 
-if (messages[code]) {
-  return messages[code];
-}
+if (messages[code]) return messages[code];
 
 return (
   (code ? code + ": " : "") +
@@ -366,9 +484,7 @@ function signInWithTimeout(email, password) {
 return new Promise(function (resolve, reject) {
 let finished = false;
   const timer = setTimeout(function () {
-    if (finished) {
-      return;
-    }
+    if (finished) return;
 
     finished = true;
 
@@ -382,18 +498,14 @@ let finished = false;
 
   auth.signInWithEmailAndPassword(email, password)
     .then(function (result) {
-      if (finished) {
-        return;
-      }
+      if (finished) return;
 
       finished = true;
       clearTimeout(timer);
       resolve(result);
     })
     .catch(function (error) {
-      if (finished) {
-        return;
-      }
+      if (finished) return;
 
       finished = true;
       clearTimeout(timer);
@@ -403,9 +515,7 @@ let finished = false;
 
 }
 async function loadBookings() {
-if (loading) {
-return;
-}
+if (loading) return;
 if (
   !auth.currentUser ||
   auth.currentUser.uid !== ADMIN_UID
@@ -416,7 +526,6 @@ if (
 
 loading = true;
 refreshBtn.disabled = true;
-
 showMessage("Loading bookings from Firebase...");
 
 try {
@@ -479,7 +588,7 @@ loginMessage.style.color = "#6ee7a0";
 async function init() {
 if (!window.firebase) {
 showMessage(
-"Firebase SDK did not load. Check your internet connection and the Firebase script tags in admin.html.",
+"Firebase SDK did not load. Check your internet connection and Firebase script tags in admin.html.",
 true
 );
 return;
@@ -495,9 +604,7 @@ try {
   loginForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    if (loginInProgress) {
-      return;
-    }
+    if (loginInProgress) return;
 
     const email = emailInput.value.trim();
     const password = passwordInput.value;
@@ -531,7 +638,6 @@ try {
 
       passwordInput.value = "";
       loginMessage.textContent = "";
-
       setLoggedIn(true);
 
       await loadBookings();
