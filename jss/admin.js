@@ -1,7 +1,7 @@
 "use strict";
 (function () {
 const firebaseConfig = {
-apiKey: "AIzaSyA5-6nRFImuPDe-KKkZV9d2zRpOICB_q9M",
+apiKey: "AIzaSyA5-6nRFImuPDe-KKZV9d2RpOICB_q9M",
 authDomain: "kulzzy-radio-app.firebaseapp.com",
 databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
 projectId: "kulzzy-radio-app",
@@ -140,10 +140,49 @@ return (
 );
 }
 
-/* ADDED: Download a celebration picture to the device */
+/* ADDED: DOWNLOAD A CELEBRATION PICTURE */
+function getFileExtension(url, mimeType) {
+const mime = String(mimeType || "").toLowerCase();
+
+if (mime.includes("png")) return "png";
+if (mime.includes("webp")) return "webp";
+if (mime.includes("gif")) return "gif";
+if (mime.includes("jpeg") || mime.includes("jpg")) return "jpg";
+
+try {
+  const pathname = new URL(url, window.location.href).pathname;
+  const match = pathname.match(/\.([a-z0-9]{2,5})$/i);
+
+  if (match && /^(jpg|jpeg|png|webp|gif|bmp|avif)$/i.test(match[1])) {
+    return match[1].toLowerCase() === "jpeg"
+      ? "jpg"
+      : match[1].toLowerCase();
+  }
+} catch (error) {
+  console.warn("Could not determine picture extension.", error);
+}
+
+return "jpg";
+}
+function triggerDownload(blob, filename) {
+const objectUrl = URL.createObjectURL(blob);
+const link = document.createElement("a");
+
+link.href = objectUrl;
+link.download = filename;
+link.style.display = "none";
+
+document.body.appendChild(link);
+link.click();
+link.remove();
+
+setTimeout(function () {
+  URL.revokeObjectURL(objectUrl);
+}, 2000);
+}
 async function downloadPhoto(url, index, button) {
 if (!url) {
-  alert("The picture URL is unavailable.");
+  showMessage("This picture does not have a valid image URL.", true);
   return;
 }
 
@@ -152,78 +191,78 @@ button.disabled = true;
 button.textContent = "PREPARING DOWNLOAD...";
 
 try {
-  let blob;
+  let response;
 
   if (/^data:image\//i.test(url)) {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Unable to read the picture.");
+    response = await fetch(url);
+  } else if (/^https?:\/\//i.test(url)) {
+    const controller = new AbortController();
+
+    const timeout = setTimeout(function () {
+      controller.abort();
+    }, 20000);
+
+    try {
+      response = await fetch(url, {
+        mode: "cors",
+        signal: controller.signal
+      });
+    } finally {
+      clearTimeout(timeout);
     }
-    blob = await response.blob();
   } else {
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error("The picture server did not allow downloading.");
-    }
-
-    blob = await response.blob();
+    throw new Error("This picture URL is not supported.");
   }
 
-  if (!blob.type.startsWith("image/")) {
-    throw new Error("The file returned is not an image.");
+  if (!response.ok) {
+    throw new Error(
+      "The picture server returned HTTP " + response.status + "."
+    );
   }
 
-  const objectUrl = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+  const blob = await response.blob();
 
-  link.href = objectUrl;
-  link.download = "kulzzy-celebration-picture-" + index + ".jpg";
-  link.style.display = "none";
+  if (!blob.size) {
+    throw new Error("The downloaded picture file is empty.");
+  }
 
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
+  if (
+    blob.type &&
+    !blob.type.toLowerCase().startsWith("image/")
+  ) {
+    throw new Error("The returned file is not an image.");
+  }
 
-  setTimeout(function () {
-    URL.revokeObjectURL(objectUrl);
-  }, 2000);
+  const extension = getFileExtension(url, blob.type);
+  const filename =
+    "Kulzzy-Radio-Celebration-Picture-" +
+    index +
+    "." +
+    extension;
 
+  triggerDownload(blob, filename);
+  showMessage("Picture download started: " + filename);
   button.textContent = "SAVED — DOWNLOAD AGAIN";
 
 } catch (error) {
   console.error("Picture download failed:", error);
 
-  /* Fallback: open the original picture so it can be saved manually */
-  const fallback = document.createElement("a");
-  fallback.href = url;
-  fallback.target = "_blank";
-  fallback.rel = "noopener noreferrer";
-  fallback.style.display = "none";
+  button.textContent = "OPEN PICTURE TO SAVE";
 
-  document.body.appendChild(fallback);
-  fallback.click();
-  fallback.remove();
-
-  alert(
-    "Automatic download was blocked by the picture host. " +
-    "The picture has been opened in a new tab. " +
-    "Use your device's Download or Save Image option to save it."
+  showMessage(
+    "Automatic picture download was blocked by the picture host. " +
+    "Open the picture using the link beside the button, then use " +
+    "your device's Download or Save Image option. " +
+    "Details: " + (error.message || "Download failed."),
+    true
   );
 
-  button.textContent = "TRY DOWNLOAD AGAIN";
 } finally {
   button.disabled = false;
+
   if (button.textContent === "PREPARING DOWNLOAD...") {
     button.textContent = originalText;
   }
-}
-
-/* Restore the normal button label after a successful download */
-if (button.textContent === "SAVED — DOWNLOAD AGAIN") {
-  setTimeout(function () {
-    button.textContent = originalText;
-  }, 2500);
 }
 }
 
@@ -263,12 +302,13 @@ photos.forEach(function (photo, index) {
     makeLink(url, "Open picture " + (index + 1))
   );
 
-  /* ADDED: Save button directly below each picture link */
+  /* ADDED: DOWNLOAD BUTTON UNDER EACH PICTURE */
   const downloadButton = document.createElement("button");
+
   downloadButton.type = "button";
   downloadButton.textContent = "⬇ SAVE PICTURE";
   downloadButton.style.cssText =
-    "display:block;margin:6px 0 12px;padding:10px 12px;" +
+    "display:block;margin:8px 0 12px;padding:10px 12px;" +
     "background:#ffd700;color:#06122a;border:0;border-radius:6px;" +
     "font-weight:bold;cursor:pointer;";
 
@@ -289,6 +329,7 @@ rows.replaceChildren();
 if (!bookings.length) {
   const row = document.createElement("tr");
   const cell = addCell(row, "No bookings found.");
+
   cell.colSpan = 10;
   rows.appendChild(row);
   return;
