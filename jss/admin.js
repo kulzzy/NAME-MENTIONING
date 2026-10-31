@@ -3,7 +3,7 @@
 (function () {
 
 const firebaseConfig = {
-apiKey: "AIzaSyA5-6nRFImuPDe-KKZV9d2RpOICB_q9M",
+apiKey: "AIzaSyA5-6nRFImuPDe-KkKZV9d2zRpOICB_q9M",
 authDomain: "kulzzy-radio-app.firebaseapp.com",
 databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
 projectId: "kulzzy-radio-app",
