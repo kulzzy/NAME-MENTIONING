@@ -1,140 +1,46 @@
 "use strict";
-
-(function () {
-const firebaseConfig = {
-apiKey: "AIzaSyA5-6nRFImuPDe-KKZV9d2zRpOICB_q9M",
-authDomain: "kulzzy-radio-app.firebaseapp.com",
-databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
-projectId: "kulzzy-radio-app",
-storageBucket: "kulzzy-radio-app.firebasestorage.app",
-messagingSenderId: "507050318850",
-appId: "1:507050318850:web:f3ff3bd88e777ef656db1b",
-measurementId: "G-WMZSVT4L5R"
-};
-
-const ADMIN_UID = "MaWXUVji3nTTRDav5ofv93hxlX83";
-const BOOKINGS_PATH = "audiovisualBookings";
-
-const loginCard = document.getElementById("loginCard");
-const dashboard = document.getElementById("dashboard");
-const loginForm = document.getElementById("loginForm");
-const loginBtn = document.getElementById("loginBtn");
-const emailInput = document.getElementById("adminEmail");
-const passwordInput = document.getElementById("adminPassword");
-const message = document.getElementById("message");
-const rows = document.getElementById("bookingRows");
-const refreshBtn = document.getElementById("refreshBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-
-let auth;
-let db;
-let refreshTimer = null;
-let loading = false;
-
-function showMessage(text, isError = false) {
-message.textContent = text;
-message.style.color = isError ? "#ff9292" : "#6ee7a0";
-}
-
-function setLoggedIn(value) {
-loginCard.classList.toggle("hidden", value);
-dashboard.classList.toggle("hidden", !value);
-}
-
-function stopAutoRefresh() {
-if (refreshTimer) {
-clearInterval(refreshTimer);
-refreshTimer = null;
-}
-}
-
-function startAutoRefresh() {
-stopAutoRefresh();
-refreshTimer = setInterval(() => {
-if (auth.currentUser && auth.currentUser.uid === ADMIN_UID) {
-loadBookings();
-}
-}, 30000);
-}
-
-function addCell(row, value) {
-const cell = document.createElement("td");
-cell.textContent =
-value === undefined || value === null || value === ""
-? "—"
-: String(value);
-row.appendChild(cell);
-return cell;
-}
-
-function makeLink(url, label) {
-const link = document.createElement("a");
-link.href = url;
-link.textContent = label;
-link.target = "_blank";
-link.rel = "noopener noreferrer";
-return link;
-}
-
-function formatDate(value) {
-if (value === undefined || value === null || value === "") return "—";
-
-let date;
-
-if (typeof value === "number") {
-  date = new Date(value);
+(function () { const firebaseConfig = { apiKey: "AIzaSyA5-6nRFImuPDe-KKZV9d2zRpOICB_q9M", authDomain: "kulzzy-radio-app.firebaseapp.com", databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app", projectId: "kulzzy-radio-app", storageBucket: "kulzzy-radio-app.firebasestorage.app", messagingSenderId: "507050318850", appId: "1:507050318850:web:f3ff3bd88e777ef656db1b", measurementId: "G-WMZSVT4L5R" };
+const ADMIN_UID = "MaWXUVji3nTTRDav5ofv93hxlX83"; const PATH = "audiovisualBookings";
+const loginCard = document.getElementById("loginCard"); const dashboard = document.getElementById("dashboard"); const loginForm = document.getElementById("loginForm"); const loginBtn = document.getElementById("loginBtn"); const emailInput = document.getElementById("adminEmail"); const passwordInput = document.getElementById("adminPassword"); const message = document.getElementById("message"); const rows = document.getElementById("bookingRows"); const refreshBtn = document.getElementById("refreshBtn"); const logoutBtn = document.getElementById("logoutBtn");
+// Show login errors even while the dashboard is hidden. const loginMessage = document.createElement("p"); loginMessage.id = "loginMessage"; loginMessage.setAttribute("role", "alert"); loginMessage.style.cssText = "white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere;color:#ff9292;"; loginForm.appendChild(loginMessage);
+let auth; let db; let refreshTimer = null; let loading = false;
+function showMessage(text, isError = false) { const color = isError ? "#ff9292" : "#6ee7a0";
+if (!dashboard || dashboard.classList.contains("hidden")) {
+  loginMessage.textContent = text;
+  loginMessage.style.color = color;
 } else {
-  const numeric = Number(value);
-  date = new Date(
-    typeof value === "string" && value.trim() !== "" &&
-    Number.isFinite(numeric) ? numeric : value
-  );
+  message.textContent = text;
+  message.style.color = color;
 }
-
-if (Number.isNaN(date.getTime())) return String(value);
-
-return date.toLocaleString("en-NG", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-  hour: "2-digit",
-  minute: "2-digit"
-});
-
 }
+function setLoggedIn(value) { loginCard.classList.toggle("hidden", value); dashboard.classList.toggle("hidden", !value); }
+function stopAutoRefresh() { if (refreshTimer) clearInterval(refreshTimer); refreshTimer = null; }
+function startAutoRefresh() { stopAutoRefresh(); refreshTimer = setInterval(() => { if (auth.currentUser && auth.currentUser.uid === ADMIN_UID) { loadBookings(); } }, 30000); }
+function addCell(row, value) { const cell = document.createElement("td"); cell.textContent = value === undefined || value === null || value === "" ? "—" : String(value); row.appendChild(cell); return cell; }
+function makeLink(url, label) { const link = document.createElement("a"); link.href = url; link.textContent = label; link.target = "_blank"; link.rel = "noopener noreferrer"; return link; }
+function formatDate(value) { if (value === undefined || value === null || value === "") return "—";
+const date = typeof value === "number"
+  ? new Date(value)
+  : new Date(value);
 
-function getPhotos(booking) {
-const result = [];
-
-if (booking.photos && !Array.isArray(booking.photos)) {
-  if (booking.photos.photo1) result.push(booking.photos.photo1);
-  if (booking.photos.photo2) result.push(booking.photos.photo2);
-  return result;
+return Number.isNaN(date.getTime())
+  ? String(value)
+  : date.toLocaleString("en-NG");
 }
-
+function getPhotos(booking) { if (booking.photos && !Array.isArray(booking.photos)) { return [booking.photos.photo1, booking.photos.photo2].filter(Boolean); }
 if (Array.isArray(booking.photos)) return booking.photos;
 if (Array.isArray(booking.images)) return booking.images;
 
-return result;
-
+return [];
 }
-
-function getPhotoUrl(photo) {
-if (typeof photo === "string") return photo;
-if (!photo || typeof photo !== "object") return "";
-
+function getPhotoUrl(photo) { if (typeof photo === "string") return photo; if (!photo || typeof photo !== "object") return "";
 return photo.signedUrl ||
   photo.signedURL ||
   photo.url ||
   photo.downloadUrl ||
   "";
-
 }
-
-function addPhotoLinks(cell, booking) {
-cell.className = "photo-links";
-const photos = getPhotos(booking);
-
+function addPhotos(cell, booking) { cell.className = "photo-links"; const photos = getPhotos(booking);
 if (!photos.length) {
   cell.textContent = "No pictures found";
   return;
@@ -145,17 +51,15 @@ photos.forEach((photo, index) => {
 
   if (!url) return;
 
-  // Display image previews when the stored value is an image URL or data URL.
   if (/^(https?:\/\/|data:image\/)/i.test(url)) {
     const img = document.createElement("img");
-    img.className = "photo-thumb";
-    img.src = url;
     img.alt = "Celebration picture " + (index + 1);
-    img.loading = "lazy";
-    img.onerror = function () {
-      img.replaceWith(document.createTextNode(
-        "Picture " + (index + 1) + " preview unavailable"
-      ));
+    img.style.cssText =
+      "display:block;width:90px;max-height:100px;object-fit:contain;margin:5px 0;";
+    img.src = url;
+    img.onerror = () => {
+      img.alt = "Picture preview unavailable";
+      img.style.display = "none";
     };
     cell.appendChild(img);
   }
@@ -167,12 +71,8 @@ photos.forEach((photo, index) => {
 if (!cell.hasChildNodes()) {
   cell.textContent = "Picture data unavailable";
 }
-
 }
-
-function renderBookings(bookings) {
-rows.replaceChildren();
-
+function renderBookings(bookings) { rows.replaceChildren();
 if (!bookings.length) {
   const row = document.createElement("tr");
   const cell = addCell(row, "No bookings found.");
@@ -184,39 +84,37 @@ if (!bookings.length) {
 bookings.forEach(booking => {
   const row = document.createElement("tr");
 
-  const datesCell = document.createElement("td");
-  datesCell.textContent =
+  const dateCell = document.createElement("td");
+  dateCell.textContent =
     "Submitted: " + formatDate(booking.createdAt) +
     "\nCelebration: " + (booking.celebrationDate || "—");
-  datesCell.style.whiteSpace = "pre-line";
-  row.appendChild(datesCell);
+  dateCell.style.whiteSpace = "pre-line";
+  row.appendChild(dateCell);
 
-  addCell(row, booking.bookingId || booking.id || "—");
-  addCell(row, booking.customerName || "—");
+  addCell(row, booking.bookingId || booking._key);
+  addCell(row, booking.customerName);
 
-  const whatsappCell = document.createElement("td");
+  const phoneCell = document.createElement("td");
   const phone = String(booking.whatsapp || "");
+
   if (phone) {
-    const digits = phone.replace(/[^\d]/g, "");
-    whatsappCell.appendChild(
-      makeLink("https://wa.me/" + digits, phone)
+    phoneCell.appendChild(
+      makeLink("https://wa.me/" + phone.replace(/[^\d]/g, ""), phone)
     );
   } else {
-    whatsappCell.textContent = "—";
+    phoneCell.textContent = "—";
   }
-  row.appendChild(whatsappCell);
+  row.appendChild(phoneCell);
 
-  addCell(row, booking.celebrantName || "—");
-  addCell(row, booking.relationship || "—");
+  addCell(row, booking.celebrantName);
+  addCell(row, booking.relationship);
   addCell(row, booking.wish || booking.message || "—");
 
   const photoCell = document.createElement("td");
-  addPhotoLinks(photoCell, booking);
+  addPhotos(photoCell, booking);
   row.appendChild(photoCell);
 
-  const amount = Number(
-    booking.amountNgn !== undefined ? booking.amountNgn : 10000
-  );
+  const amount = Number(booking.amountNgn ?? 10000);
   addCell(
     row,
     "₦" + (Number.isFinite(amount) ? amount : 10000).toLocaleString("en-NG")
@@ -224,56 +122,50 @@ bookings.forEach(booking => {
 
   const statusCell = document.createElement("td");
   const status = String(booking.paymentStatus || "pending").toLowerCase();
-  const statusLabel = document.createElement("div");
-  statusLabel.textContent = status.toUpperCase();
-  statusLabel.className = status === "paid" ? "paid" : "pending";
-  statusCell.appendChild(statusLabel);
+  const statusText = document.createElement("strong");
+
+  statusText.textContent = status.toUpperCase();
+  statusText.style.color = status === "paid" ? "#6ee7a0" : "#ffcf70";
+  statusCell.appendChild(statusText);
 
   if (status !== "paid") {
-    const paidBtn = document.createElement("button");
-    paidBtn.type = "button";
-    paidBtn.className = "status-button";
-    paidBtn.textContent = "MARK AS PAID";
+    const paidButton = document.createElement("button");
+    paidButton.type = "button";
+    paidButton.textContent = "MARK AS PAID";
+    paidButton.style.cssText =
+      "display:block;margin-top:8px;padding:9px;font-size:12px;";
 
-    paidBtn.addEventListener("click", async () => {
-      const confirmed = window.confirm(
-        "Have you independently confirmed that ₦10,000 was received for booking " +
-        (booking.bookingId || "this booking") +
-        "?\n\nOnly continue if the payment has actually been received."
-      );
+    paidButton.addEventListener("click", async () => {
+      if (!window.confirm(
+        "Have you independently confirmed receipt of ₦10,000 for this booking?"
+      )) return;
 
-      if (!confirmed) return;
+      paidButton.disabled = true;
 
-      paidBtn.disabled = true;
       try {
         await db.ref(
-          BOOKINGS_PATH + "/" + booking._key + "/paymentStatus"
+          PATH + "/" + booking._key + "/paymentStatus"
         ).set("paid");
 
         showMessage("Payment status updated to PAID.");
         await loadBookings();
       } catch (error) {
         showMessage(
-          "Could not update payment status: " + error.message +
-          "\nCheck that the latest Firebase rules have been published.",
+          "Unable to update payment status: " + error.message,
           true
         );
-        paidBtn.disabled = false;
+        paidButton.disabled = false;
       }
     });
 
-    statusCell.appendChild(paidBtn);
+    statusCell.appendChild(paidButton);
   }
 
   row.appendChild(statusCell);
   rows.appendChild(row);
 });
-
 }
-
-async function loadBookings() {
-if (loading) return;
-
+async function loadBookings() { if (loading) return;
 if (!auth.currentUser || auth.currentUser.uid !== ADMIN_UID) {
   setLoggedIn(false);
   return;
@@ -284,62 +176,46 @@ refreshBtn.disabled = true;
 showMessage("Loading bookings from Firebase...");
 
 try {
-  const snapshot = await db.ref(BOOKINGS_PATH).once("value");
+  const snapshot = await db.ref(PATH).once("value");
   const bookings = [];
 
   snapshot.forEach(child => {
-    const booking = child.val();
-    if (booking && typeof booking === "object") {
-      bookings.push({ ...booking, _key: child.key });
+    const value = child.val();
+    if (value && typeof value === "object") {
+      bookings.push({ ...value, _key: child.key });
     }
   });
 
-  bookings.sort((a, b) => {
-    const aTime = Number(a.createdAt) || 0;
-    const bTime = Number(b.createdAt) || 0;
-    return bTime - aTime;
-  });
+  bookings.sort((a, b) =>
+    (Number(b.createdAt) || 0) - (Number(a.createdAt) || 0)
+  );
 
   renderBookings(bookings);
-  showMessage(
-    "Bookings loaded: " + bookings.length +
-    ". Last refreshed: " + new Date().toLocaleTimeString("en-NG") +
-    ". Confirm payment independently before marking it PAID."
-  );
+  showMessage("Bookings loaded: " + bookings.length +
+    ". Payment must be verified independently.");
 } catch (error) {
   showMessage(
-    "Could not load bookings from Firebase.\n" + error.message +
-    "\nCheck your published Realtime Database rules and administrator account.",
+    "Firebase could not load bookings.\n" +
+    error.message +
+    "\nCheck the published database rules.",
     true
   );
 } finally {
   loading = false;
   refreshBtn.disabled = false;
 }
-
 }
-
-async function logout() {
-stopAutoRefresh();
-
+async function logout() { stopAutoRefresh();
 try {
   await auth.signOut();
-} catch (_) {
-  // Hide the dashboard even if sign-out encounters an error.
-}
+} catch (_) {}
 
 rows.replaceChildren();
 setLoggedIn(false);
-showMessage("You have been logged out.");
-
+loginMessage.textContent = "You have been logged out.";
+loginMessage.style.color = "#6ee7a0";
 }
-
-async function init() {
-if (!window.firebase) {
-showMessage("Firebase SDK failed to load. Check your internet connection.", true);
-return;
-}
-
+async function init() { if (!window.firebase) { showMessage( "Firebase SDK did not load. Check your internet connection and the Firebase script tags in admin.html.", true ); return; }
 try {
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -361,25 +237,48 @@ try {
 
     loginBtn.disabled = true;
     loginBtn.textContent = "SIGNING IN...";
-    showMessage("Checking administrator credentials...");
+    showMessage("Connecting to Firebase Authentication...");
 
     try {
-      const credential = await auth.signInWithEmailAndPassword(email, password);
+      const result = await auth.signInWithEmailAndPassword(email, password);
 
-      if (!credential.user || credential.user.uid !== ADMIN_UID) {
+      if (!result.user || result.user.uid !== ADMIN_UID) {
         await auth.signOut();
         throw new Error(
-          "This account is not the authorised Kulzzy Radio administrator."
+          "The signed-in account UID does not match the authorized administrator UID."
         );
       }
 
       passwordInput.value = "";
+      loginMessage.textContent = "";
       setLoggedIn(true);
+
       await loadBookings();
       startAutoRefresh();
     } catch (error) {
+      const friendlyErrors = {
+        "auth/invalid-credential":
+          "Email or password was not accepted. Check the Firebase account credentials.",
+        "auth/user-not-found":
+          "No Firebase user was found for this email.",
+        "auth/wrong-password":
+          "The password was not accepted.",
+        "auth/too-many-requests":
+          "Too many failed attempts. Wait before trying again.",
+        "auth/operation-not-allowed":
+          "Email/Password sign-in is not enabled in Firebase Authentication.",
+        "auth/network-request-failed":
+          "Network request failed. Check your internet connection."
+      };
+
+      const detail = friendlyErrors[error.code] ||
+        error.message ||
+        "Unknown error.";
+
       showMessage(
-        "Administrator login failed.\n" + error.message,
+        "SIGN-IN FAILED\n" +
+        (error.code ? error.code + "\n" : "") +
+        detail,
         true
       );
     } finally {
@@ -404,8 +303,5 @@ try {
 } catch (error) {
   showMessage("Firebase initialization failed: " + error.message, true);
 }
-
 }
-
-init();
-})();
+init(); })();
