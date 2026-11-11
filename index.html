@@ -455,6 +455,23 @@ input[type="file"]::file-selector-button {
   </small>
 </div>
 
+<!-- NEW BANK NAME FIELD -->
+
+<div class="field">
+  <label for="bankNameUsedForPayment">
+    Bank Name Used for Payment
+    <span class="required">*</span>
+  </label>
+
+  <input
+    id="bankNameUsedForPayment"
+    type="text"
+    placeholder="Enter the bank name you will use for payment"
+    autocomplete="off"
+    required
+  >
+</div>
+
 <div class="field">
   <label for="celebrantName">
     Celebrant's Full Name <span class="required">*</span>
@@ -923,6 +940,9 @@ form.addEventListener("submit", async (event) => {
   const whatsapp =
     document.getElementById("whatsapp").value.trim();
 
+  const bankNameUsedForPayment =
+    document.getElementById("bankNameUsedForPayment").value.trim();
+
   const celebrantName =
     document.getElementById("celebrantName").value.trim();
 
@@ -936,6 +956,7 @@ form.addEventListener("submit", async (event) => {
   if (
     !customerName ||
     !whatsapp ||
+    !bankNameUsedForPayment ||
     !celebrantName ||
     !relationship ||
     !celebrationDate
@@ -1018,6 +1039,7 @@ form.addEventListener("submit", async (event) => {
       customerUid: customer.uid,
       customerName: customerName,
       whatsapp: whatsapp,
+      bankNameUsedForPayment: bankNameUsedForPayment,
       celebrantName: celebrantName,
       relationship: relationship,
       celebrationDate: celebrationDate,
