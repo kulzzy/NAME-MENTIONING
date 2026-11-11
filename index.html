@@ -1,1093 +1,1122 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#06122a">
-  <title>Announcement With Audiovisual | Kulzzy Radio</title>  <style>
-    :root {
-      --navy: #06122a;
-      --gold: #ffd700;
-      --white: #ffffff;
-      --muted: #c2cbe0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#06122a">
+<title>Announcement With Audiovisual | Kulzzy Radio</title><style>
+:root {
+  --navy: #06122a;
+  --gold: #ffd700;
+  --white: #ffffff;
+  --muted: #c2cbe0;
+}
 
-    * { box-sizing: border-box; }
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top right, #172e59 0, transparent 35%),
-        var(--navy);
-      color: var(--white);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right, #172e59 0, transparent 35%),
+    var(--navy);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
 
-    .container {
-      width: min(100% - 28px, 760px);
-      margin: 0 auto;
-    }
+.container {
+  width: min(100% - 28px, 760px);
+  margin: 0 auto;
+}
 
-    .topbar {
-      padding: 22px 0 10px;
-      text-align: center;
-    }
+.topbar {
+  padding: 22px 0 10px;
+  text-align: center;
+}
 
-    .brand-mark {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      color: var(--gold);
-      font-size: 25px;
-      font-weight: 900;
-    }
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  font-size: 25px;
+  font-weight: 900;
+}
 
-    .eyebrow {
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+.eyebrow {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
-    h1 {
-      margin: 12px 0 8px;
-      color: var(--gold);
-      font-size: clamp(27px, 6vw, 42px);
-      line-height: 1.15;
-      text-align: center;
-    }
+h1 {
+  margin: 12px 0 8px;
+  color: var(--gold);
+  font-size: clamp(27px, 6vw, 42px);
+  line-height: 1.15;
+  text-align: center;
+}
 
-    .intro {
-      max-width: 600px;
-      margin: 0 auto 22px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 15px;
-    }
+.intro {
+  max-width: 600px;
+  margin: 0 auto 22px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 15px;
+}
 
-    .price-card {
-      margin: 22px 0;
-      padding: 20px;
-      border: 1px solid rgba(255, 215, 0, 0.65);
-      border-radius: 18px;
-      background: linear-gradient(135deg, #10254c, #08152e);
-      text-align: center;
-    }
+.price-card {
+  margin: 22px 0;
+  padding: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.65);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #10254c, #08152e);
+  text-align: center;
+}
 
-    .price-label {
-      color: var(--muted);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+.price-label {
+  color: var(--muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-    .price {
-      margin: 3px 0;
-      color: var(--gold);
-      font-size: clamp(36px, 9vw, 48px);
-      font-weight: 900;
-    }
+.price {
+  margin: 3px 0;
+  color: var(--gold);
+  font-size: clamp(36px, 9vw, 48px);
+  font-weight: 900;
+}
 
-    .price-note {
-      color: var(--muted);
-      font-size: 12px;
-    }
+.price-note {
+  color: var(--muted);
+  font-size: 12px;
+}
 
-    .currency-card,
-    .form-card {
-      margin: 20px 0;
-      padding: 18px;
-      border: 1px solid #263c61;
-      border-radius: 16px;
-      background: rgba(7, 20, 43, 0.92);
-    }
+.currency-card,
+.form-card {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid #263c61;
+  border-radius: 16px;
+  background: rgba(7, 20, 43, 0.92);
+}
 
-    .currency-card h2,
-    .form-card h2 {
-      margin: 0 0 5px;
-      color: var(--gold);
-      font-size: 21px;
-    }
+/* PREMIUM CURRENCY SECTION */
 
-    .currency-intro,
-    .form-description {
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 13px;
-    }
+.currency-card {
+  border: 1px solid #c9a94b;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #152744, #081326 65%, #172b48);
+  box-shadow:
+    0 8px 25px rgba(0,0,0,0.35),
+    inset 0 1px 1px rgba(255,255,255,0.12);
+}
 
-    .currency-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px;
-    }
+.currency-card h2,
+.form-card h2 {
+  margin: 0 0 5px;
+  color: var(--gold);
+  font-size: 21px;
+}
 
-    .currency-item {
-      padding: 10px;
-      border: 1px solid #263b5e;
-      border-radius: 10px;
-      background: #0c1d3b;
-    }
+.currency-card h2 {
+  background: linear-gradient(90deg, #ffffff, #ffd700, #c0c0c0, #ffffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+}
 
-    .currency-name {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-    }
+.currency-intro,
+.form-description {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
 
-    .currency-value {
-      display: block;
-      color: var(--gold);
-      font-size: 17px;
-      font-weight: 800;
-    }
+.currency-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+}
 
-    .currency-disclaimer {
-      margin: 13px 0 0;
-      color: var(--muted);
-      font-size: 11px;
-    }
+.currency-item {
+  min-width: 0;
+  padding: 12px 5px;
+  border: 1px solid #b9a56d;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #172b49, #09162c);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
 
-    .field { margin-bottom: 17px; }
+/* SILVER */
+.currency-item:nth-child(1),
+.currency-item:nth-child(4),
+.currency-item:nth-child(7) {
+  border-color: #c0c0c0;
+  background: linear-gradient(145deg, #394452, #101b2b);
+}
 
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 14px;
-      font-weight: 700;
-    }
+/* GOLD */
+.currency-item:nth-child(2),
+.currency-item:nth-child(5),
+.currency-item:nth-child(8) {
+  border-color: #ffd700;
+  background: linear-gradient(145deg, #493b15, #171b29);
+}
 
-    .required { color: var(--gold); }
+/* DIAMOND */
+.currency-item:nth-child(3),
+.currency-item:nth-child(6),
+.currency-item:nth-child(9),
+.currency-item:nth-child(10) {
+  border-color: #a9e8ff;
+  background: linear-gradient(145deg, #173b50, #101a32);
+}
 
-    input,
-    select {
-      display: block;
-      width: 100%;
-      min-height: 48px;
-      padding: 12px;
-      border: 1px solid #405477;
-      border-radius: 10px;
-      outline: none;
-      background: #07142b;
-      color: var(--white);
-      font: inherit;
-      font-size: 14px;
-    }
+.currency-name {
+  display: block;
+  color: #e0e7f2;
+  font-size: 11px;
+  line-height: 1.4;
+}
 
-    input:focus,
-    select:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.12);
-    }
+.currency-value {
+  display: block;
+  margin-top: 5px;
+  color: #ffd700;
+  font-size: 15px;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
 
-    input[type="file"] {
-      padding: 10px;
-      font-size: 12px;
-    }
+.currency-item:nth-child(odd) .currency-value {
+  color: #e4e8ed;
+}
 
-    input[type="file"]::file-selector-button {
-      margin-right: 10px;
-      padding: 8px 10px;
-      border: 0;
-      border-radius: 7px;
-      background: var(--gold);
-      color: var(--navy);
-      font-weight: 800;
-    }
+.currency-item:nth-child(3n) .currency-value {
+  color: #a9e8ff;
+}
 
-    .help {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 12px;
-    }
+.currency-disclaimer {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
 
-    .photo-preview {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin-top: 12px;
-    }
+.field { margin-bottom: 17px; }
 
-    .photo-preview img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border: 1px solid #52688c;
-      border-radius: 9px;
-    }
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 14px;
+  font-weight: 700;
+}
 
-    .notice {
-      margin: 18px 0;
-      padding: 13px;
-      border-left: 4px solid var(--gold);
-      border-radius: 8px;
-      background: #132747;
-      color: #e5ebf8;
-      font-size: 12px;
-    }
+.required { color: var(--gold); }
 
-    .notice strong { color: var(--gold); }
+input,
+select {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid #405477;
+  border-radius: 10px;
+  outline: none;
+  background: #07142b;
+  color: var(--white);
+  font: inherit;
+  font-size: 14px;
+}
 
-    .submit-button {
-      display: block;
-      width: 100%;
-      min-height: 54px;
-      padding: 14px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 16px;
-      font-weight: 900;
-      cursor: pointer;
-    }
+input:focus,
+select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.12);
+}
 
-    .submit-button:disabled {
-      opacity: 0.6;
-      cursor: wait;
-    }
+input[type="file"] {
+  padding: 10px;
+  font-size: 12px;
+}
 
-    .status {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 9px;
-      font-size: 13px;
-      overflow-wrap: anywhere;
-    }
+input[type="file"]::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 800;
+}
 
-    .status.show { display: block; }
+.help {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
 
-    .status.error {
-      border: 1px solid #9d4242;
-      background: #351b25;
-      color: #ffdada;
-    }
+.photo-preview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
 
-    .status.success {
-      border: 1px solid #267b52;
-      background: #102e28;
-      color: #d4ffe9;
-    }
+.photo-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #52688c;
+  border-radius: 9px;
+}
 
-    .footer {
-      padding: 25px 10px 32px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 12px;
-    }
+.notice {
+  margin: 18px 0;
+  padding: 13px;
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  background: #132747;
+  color: #e5ebf8;
+  font-size: 12px;
+}
 
-    .stay-tuned {
-      margin-top: 12px;
-      color: var(--gold);
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
+.notice strong { color: var(--gold); }
 
-    @media (max-width: 420px) {
-      .form-card,
-      .currency-card { padding: 15px; }
+.submit-button {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
 
-      .currency-item { padding: 9px; }
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
 
-      .currency-value { font-size: 15px; }
-    }
-  </style></head><body>
-  <header class="topbar">
-    <div class="container">
-      <div class="brand-mark" aria-label="Kulzzy Radio">K</div>
-      <div class="eyebrow">Celebration Booking</div>  <h1>ANNOUNCEMENT WITH AUDIOVISUAL</h1>
+.status {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 9px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
 
-  <p class="intro">
-    Celebrate someone special with a personalised announcement and
-    audiovisual celebration on Kulzzy Radio.
-  </p>
-</div>
+.status.show { display: block; }
 
-  </header>  <main class="container"><section class="price-card">
+.status.error {
+  border: 1px solid #9d4242;
+  background: #351b25;
+  color: #ffdada;
+}
+
+.status.success {
+  border: 1px solid #267b52;
+  background: #102e28;
+  color: #d4ffe9;
+}
+
+.footer {
+  padding: 25px 10px 32px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+
+.stay-tuned {
+  margin-top: 12px;
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 420px) {
+  .form-card,
+  .currency-card {
+    padding: 12px;
+  }
+
+  .currency-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .currency-item {
+    padding: 9px 2px;
+    border-radius: 8px;
+  }
+
+  .currency-name {
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  .currency-value {
+    font-size: 11px;
+  }
+}
+</style></head><body><header class="topbar">
+  <div class="container">
+    <div class="brand-mark" aria-label="Kulzzy Radio">K</div>
+    <div class="eyebrow">Celebration Booking</div><h1>ANNOUNCEMENT WITH AUDIOVISUAL</h1>
+
+<p class="intro">
+  Celebrate someone special with a personalised announcement and
+  audiovisual celebration on Kulzzy Radio.
+</p>
+
+  </div>
+</header><main class="container"><section class="price-card">
   <div class="price-label">Announcement With Audiovisual</div>
   <div class="price">₦10,000</div>
   <div class="price-note">One booking · Two pictures required</div>
-</section>
-
-<section class="currency-card">
-  <h2>₦10,000 — International Currency Guide</h2>
-
-  <p class="currency-intro">
+</section><section class="currency-card">
+  <h2>₦10,000 — International Currency Guide</h2>  <p class="currency-intro">
     Approximate equivalents for international visitors.
-  </p>
+  </p>  <div class="currency-grid"><div class="currency-item">
+  <span class="currency-name">🇳🇬 Nigerian Naira (NGN)</span>
+  <span class="currency-value">₦10,000</span>
+</div>
 
-  <div class="currency-grid">
-    <div class="currency-item">
-      <span class="currency-name">🇳🇬 Nigerian Naira (NGN)</span>
-      <span class="currency-value">₦10,000</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇺🇸 US Dollar (USD)</span>
+  <span class="currency-value">≈ $6.50</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇺🇸 US Dollar (USD)</span>
-      <span class="currency-value">≈ $6.50</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇬🇧 British Pound (GBP)</span>
+  <span class="currency-value">≈ £4.90</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇬🇧 British Pound (GBP)</span>
-      <span class="currency-value">≈ £4.90</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇪🇺 Euro (EUR)</span>
+  <span class="currency-value">≈ €5.70</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇪🇺 Euro (EUR)</span>
-      <span class="currency-value">≈ €5.70</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇨🇦 Canadian Dollar (CAD)</span>
+  <span class="currency-value">≈ C$9.10</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇨🇦 Canadian Dollar (CAD)</span>
-      <span class="currency-value">≈ C$9.10</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇦🇺 Australian Dollar (AUD)</span>
+  <span class="currency-value">≈ A$10</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇦🇺 Australian Dollar (AUD)</span>
-      <span class="currency-value">≈ A$10</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇿🇦 South African Rand (ZAR)</span>
+  <span class="currency-value">≈ R115</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇿🇦 South African Rand (ZAR)</span>
-      <span class="currency-value">≈ R115</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇬🇭 Ghanaian Cedi (GHS)</span>
+  <span class="currency-value">≈ GH₵95</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇬🇭 Ghanaian Cedi (GHS)</span>
-      <span class="currency-value">≈ GH₵95</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇰🇪 Kenyan Shilling (KES)</span>
+  <span class="currency-value">≈ KSh900</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇰🇪 Kenyan Shilling (KES)</span>
-      <span class="currency-value">≈ KSh900</span>
-    </div>
+<div class="currency-item">
+  <span class="currency-name">🇮🇳 Indian Rupee (INR)</span>
+  <span class="currency-value">≈ ₹550</span>
+</div>
 
-    <div class="currency-item">
-      <span class="currency-name">🇮🇳 Indian Rupee (INR)</span>
-      <span class="currency-value">≈ ₹550</span>
-    </div>
-  </div>
-
-  <p class="currency-disclaimer">
+  </div>  <p class="currency-disclaimer">
     These figures are estimates, not live exchange rates. Actual rates
     and payment charges may vary. The booking price is ₦10,000.
   </p>
-</section>
-
-<section class="form-card">
-  <h2>Book Your Celebration</h2>
-
-  <p class="form-description">
+</section><section class="form-card">
+  <h2>Book Your Celebration</h2>  <p class="form-description">
     Complete the required details and upload exactly two pictures.
-  </p>
+  </p>  <form id="bookingForm"><div class="field">
+  <label for="customerName">
+    Your Full Name <span class="required">*</span>
+  </label>
 
-  <form id="bookingForm">
+  <input
+    id="customerName"
+    type="text"
+    autocomplete="name"
+    placeholder="Enter your full name"
+    required
+  >
+</div>
 
-    <div class="field">
-      <label for="customerName">
-        Your Full Name <span class="required">*</span>
-      </label>
+<div class="field">
+  <label for="whatsapp">
+    WhatsApp Number With Country Code
+    <span class="required">*</span>
+  </label>
 
-      <input
-        id="customerName"
-        type="text"
-        autocomplete="name"
-        placeholder="Enter your full name"
-        required
-      >
-    </div>
+  <input
+    id="whatsapp"
+    type="tel"
+    inputmode="tel"
+    autocomplete="tel"
+    placeholder="+2348012345678"
+    required
+  >
 
-    <div class="field">
-      <label for="whatsapp">
-        WhatsApp Number With Country Code
-        <span class="required">*</span>
-      </label>
+  <small class="help">
+    Include the plus sign and country code, for example +234...
+  </small>
+</div>
 
-      <input
-        id="whatsapp"
-        type="tel"
-        inputmode="tel"
-        autocomplete="tel"
-        placeholder="+2348012345678"
-        required
-      >
+<div class="field">
+  <label for="celebrantName">
+    Celebrant's Full Name <span class="required">*</span>
+  </label>
 
-      <small class="help">
-        Include the plus sign and country code, for example +234...
-      </small>
-    </div>
+  <input
+    id="celebrantName"
+    type="text"
+    placeholder="Who are we celebrating?"
+    required
+  >
+</div>
 
-    <div class="field">
-      <label for="celebrantName">
-        Celebrant's Full Name <span class="required">*</span>
-      </label>
+<div class="field">
+  <label for="relationship">
+    Your Relationship With The Celebrant
+    <span class="required">*</span>
+  </label>
 
-      <input
-        id="celebrantName"
-        type="text"
-        placeholder="Who are we celebrating?"
-        required
-      >
-    </div>
+  <select id="relationship" required>
+    <option value="">Select relationship</option>
+    <option>Myself</option>
+    <option>Husband</option>
+    <option>Wife</option>
+    <option>Boyfriend</option>
+    <option>Girlfriend</option>
+    <option>Father</option>
+    <option>Mother</option>
+    <option>Son</option>
+    <option>Daughter</option>
+    <option>Brother</option>
+    <option>Sister</option>
+    <option>Friend</option>
+    <option>Colleague</option>
+    <option>Customer</option>
+    <option>Other Family Member</option>
+    <option>Other</option>
+  </select>
+</div>
 
-    <div class="field">
-      <label for="relationship">
-        Your Relationship With The Celebrant
-        <span class="required">*</span>
-      </label>
+<div class="field">
+  <label for="celebrationDate">
+    Celebration Date <span class="required">*</span>
+  </label>
 
-      <select id="relationship" required>
-        <option value="">Select relationship</option>
-        <option>Myself</option>
-        <option>Husband</option>
-        <option>Wife</option>
-        <option>Boyfriend</option>
-        <option>Girlfriend</option>
-        <option>Father</option>
-        <option>Mother</option>
-        <option>Son</option>
-        <option>Daughter</option>
-        <option>Brother</option>
-        <option>Sister</option>
-        <option>Friend</option>
-        <option>Colleague</option>
-        <option>Customer</option>
-        <option>Other Family Member</option>
-        <option>Other</option>
-      </select>
-    </div>
+  <input id="celebrationDate" type="date" required>
+</div>
 
-    <div class="field">
-      <label for="celebrationDate">
-        Celebration Date <span class="required">*</span>
-      </label>
+<div class="field">
+  <label for="photos">
+    Upload Exactly 2 Pictures <span class="required">*</span>
+  </label>
 
-      <input id="celebrationDate" type="date" required>
-    </div>
+  <input
+    id="photos"
+    type="file"
+    accept="image/*"
+    multiple
+    required
+  >
 
-    <div class="field">
-      <label for="photos">
-        Upload Exactly 2 Pictures <span class="required">*</span>
-      </label>
+  <small class="help">
+    Select exactly two pictures. Large images are automatically
+    resized and compressed before upload.
+  </small>
 
-      <input
-        id="photos"
-        type="file"
-        accept="image/*"
-        multiple
-        required
-      >
+  <div id="photoPreview" class="photo-preview"></div>
+</div>
 
-      <small class="help">
-        Select exactly two pictures. Large images are automatically
-        resized and compressed before upload.
-      </small>
+<div class="notice">
+  <strong>Booking price: ₦10,000.</strong>
+  Your booking details and pictures must be saved before the payment
+  page opens. Payment must be confirmed before the announcement is
+  treated as paid.
+</div>
 
-      <div id="photoPreview" class="photo-preview"></div>
-    </div>
+<button id="submitButton" class="submit-button" type="submit">
+  MAKE PAYMENT NOW — ₦10,000
+</button>
 
-    <div class="notice">
-      <strong>Booking price: ₦10,000.</strong>
-      Your booking details and pictures must be saved before the payment
-      page opens. Payment must be confirmed before the announcement is
-      treated as paid.
-    </div>
-
-    <button id="submitButton" class="submit-button" type="submit">
-      MAKE PAYMENT NOW — ₦10,000
-    </button>
-
-    <div
-      id="statusMessage"
-      class="status"
-      role="status"
-      aria-live="polite"
-    ></div>
+<div
+  id="statusMessage"
+  class="status"
+  role="status"
+  aria-live="polite"
+></div>
 
   </form>
-</section>
+</section></main><footer class="footer">
+  <div>Currency equivalents are estimates and may change.</div>
+  <div class="stay-tuned">STAY TUNED IN</div>
+</footer><!-- Firebase SDKs --><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script><script>
+"use strict";
 
-  </main>  <footer class="footer">
-    <div>Currency equivalents are estimates and may change.</div>
-    <div class="stay-tuned">STAY TUNED IN</div>
-  </footer>  <!-- Firebase SDKs -->  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>  <script>
-    "use strict";
+/*
+  KULZZY RADIO
+  ANNOUNCEMENT WITH AUDIOVISUAL
+  Firebase Realtime Database booking connection.
 
-    /*
-      KULZZY RADIO
-      ANNOUNCEMENT WITH AUDIOVISUAL
-      Firebase Realtime Database booking connection.
+  Payment link remains managed separately in payment.html.
+*/
 
-      Payment link remains managed separately in payment.html.
-    */
+const firebaseConfig = {
+  apiKey: "AIzaSyA5-6nRFImuPDe-KkKZV9d2zRpOICB_q9M",
+  authDomain: "kulzzy-radio-app.firebaseapp.com",
+  databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "kulzzy-radio-app",
+  storageBucket: "kulzzy-radio-app.firebasestorage.app",
+  messagingSenderId: "507050318850",
+  appId: "1:507050318850:web:f3ff3bd88e777ef656db1b",
+  measurementId: "G-WMZSVT4L5R"
+};
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA5-6nRFImuPDe-KkKZV9d2zRpOICB_q9M",
-      authDomain: "kulzzy-radio-app.firebaseapp.com",
-      databaseURL: "https://kulzzy-radio-app-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "kulzzy-radio-app",
-      storageBucket: "kulzzy-radio-app.firebasestorage.app",
-      messagingSenderId: "507050318850",
-      appId: "1:507050318850:web:f3ff3bd88e777ef656db1b",
-      measurementId: "G-WMZSVT4L5R"
-    };
+const PAYMENT_PAGE_URL = new URL(
+  "payment.html",
+  window.location.href
+);
 
-    const PAYMENT_PAGE_URL = new URL(
-      "payment.html",
-      window.location.href
+const BOOKING_AMOUNT = 10000;
+const REQUIRED_PHOTOS = 2;
+const MAX_PHOTO_BYTES = 120 * 1024;
+const MAX_TOTAL_BYTES = 650 * 1024;
+
+const form = document.getElementById("bookingForm");
+const photoInput = document.getElementById("photos");
+const preview = document.getElementById("photoPreview");
+const button = document.getElementById("submitButton");
+const statusBox = document.getElementById("statusMessage");
+const dateInput = document.getElementById("celebrationDate");
+
+let database;
+let auth;
+let firebaseReady = false;
+let submitting = false;
+
+/* Initialize Firebase */
+
+try {
+  const firebaseApp = firebase.apps.length
+    ? firebase.app()
+    : firebase.initializeApp(firebaseConfig);
+
+  database = firebase.database(firebaseApp);
+  auth = firebase.auth(firebaseApp);
+  firebaseReady = true;
+
+} catch (error) {
+  console.error("Firebase initialization failed:", error);
+}
+
+/* Earliest selectable date */
+
+const today = new Date();
+
+dateInput.min =
+  `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+function showStatus(message, type) {
+  statusBox.textContent = message;
+  statusBox.className = `status show ${type}`;
+}
+
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => resolve(String(reader.result));
+
+    reader.onerror = () => reject(
+      new Error(
+        `Your browser could not read ${file.name}. Please select it again.`
+      )
     );
 
-    const BOOKING_AMOUNT = 10000;
-    const REQUIRED_PHOTOS = 2;
-    const MAX_PHOTO_BYTES = 120 * 1024;
-    const MAX_TOTAL_BYTES = 650 * 1024;
+    reader.readAsDataURL(file);
+  });
+}
 
-    const form = document.getElementById("bookingForm");
-    const photoInput = document.getElementById("photos");
-    const preview = document.getElementById("photoPreview");
-    const button = document.getElementById("submitButton");
-    const statusBox = document.getElementById("statusMessage");
-    const dateInput = document.getElementById("celebrationDate");
-
-    let database;
-    let auth;
-    let firebaseReady = false;
-    let submitting = false;
-
-    /*
-      Initialize Firebase without initializing the same app twice.
-    */
+async function decodeImageFile(file) {
+  if ("createImageBitmap" in window) {
     try {
-      const firebaseApp = firebase.apps.length
-        ? firebase.app()
-        : firebase.initializeApp(firebaseConfig);
-
-      database = firebase.database(firebaseApp);
-      auth = firebase.auth(firebaseApp);
-      firebaseReady = true;
-
+      return await createImageBitmap(file);
     } catch (error) {
-      console.error("Firebase initialization failed:", error);
+      console.warn(
+        "createImageBitmap failed; trying Image element.",
+        error
+      );
     }
+  }
 
-    /*
-      Use the device's local date as the earliest selectable date.
-    */
-    const today = new Date();
+  const objectURL = URL.createObjectURL(file);
 
-    dateInput.min =
-      `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  try {
+    const image = await new Promise((resolve, reject) => {
+      const element = new Image();
 
-    function showStatus(message, type) {
-      statusBox.textContent = message;
-      statusBox.className = `status show ${type}`;
-    }
+      element.onload = () => resolve(element);
 
-    function readFileAsDataURL(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = () => resolve(String(reader.result));
-
-        reader.onerror = () => reject(
-          new Error(
-            `Your browser could not read ${file.name}. Please select it again.`
-          )
-        );
-
-        reader.readAsDataURL(file);
-      });
-    }
-
-    async function decodeImageFile(file) {
-      if ("createImageBitmap" in window) {
-        try {
-          return await createImageBitmap(file);
-        } catch (error) {
-          console.warn(
-            "createImageBitmap failed; trying Image element.",
-            error
-          );
-        }
-      }
-
-      const objectURL = URL.createObjectURL(file);
-
-      try {
-        const image = await new Promise((resolve, reject) => {
-          const element = new Image();
-
-          element.onload = () => resolve(element);
-
-          element.onerror = () => reject(
-            new Error(`The browser could not decode ${file.name}.`)
-          );
-
-          element.src = objectURL;
-        });
-
-        URL.revokeObjectURL(objectURL);
-        return image;
-
-      } catch (error) {
-        URL.revokeObjectURL(objectURL);
-      }
-
-      const dataURL = await readFileAsDataURL(file);
-
-      return await new Promise((resolve, reject) => {
-        const image = new Image();
-
-        image.onload = () => resolve(image);
-
-        image.onerror = () => reject(
-          new Error(
-            `Your browser cannot decode ${file.name}. Please select a normal JPG or PNG image.`
-          )
-        );
-
-        image.src = dataURL;
-      });
-    }
-
-    function canvasToBlob(canvas, quality) {
-      return new Promise((resolve, reject) => {
-        canvas.toBlob((blob) => {
-          if (blob) {
-            resolve(blob);
-          } else {
-            reject(
-              new Error("Your browser could not compress this picture.")
-            );
-          }
-        }, "image/jpeg", quality);
-      });
-    }
-
-    async function blobToDataURL(blob) {
-      return await readFileAsDataURL(blob);
-    }
-
-    async function compressImage(file) {
-      let image;
-
-      try {
-        image = await decodeImageFile(file);
-      } catch (error) {
-        console.error("Image decoding failed:", file.name, error);
-
-        throw new Error(
-          `${file.name} could not be processed. Please save/export it as a normal JPG or PNG and select it again.`
-        );
-      }
-
-      const originalWidth = image.width;
-      const originalHeight = image.height;
-
-      if (!originalWidth || !originalHeight) {
-        if (typeof image.close === "function") image.close();
-
-        throw new Error(
-          `${file.name} has invalid dimensions. Please select another picture.`
-        );
-      }
-
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-
-      if (!context) {
-        if (typeof image.close === "function") image.close();
-
-        throw new Error(
-          "Your browser cannot compress pictures on this device."
-        );
-      }
-
-      let scale = Math.min(
-        1,
-        1800 / Math.max(originalWidth, originalHeight)
+      element.onerror = () => reject(
+        new Error(`The browser could not decode ${file.name}.`)
       );
 
-      let bestBlob = null;
-
-      for (let dimensionPass = 0; dimensionPass < 12; dimensionPass++) {
-        canvas.width = Math.max(1, Math.round(originalWidth * scale));
-        canvas.height = Math.max(1, Math.round(originalHeight * scale));
-
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = "#ffffff";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        context.drawImage(
-          image,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-
-        for (const quality of [
-          0.86, 0.76, 0.66, 0.56,
-          0.46, 0.36, 0.28, 0.20
-        ]) {
-          const blob = await canvasToBlob(canvas, quality);
-          bestBlob = blob;
-
-          if (blob.size <= MAX_PHOTO_BYTES) {
-            if (typeof image.close === "function") image.close();
-
-            return {
-              contentType: "image/jpeg",
-              dataURL: await blobToDataURL(blob),
-              size: blob.size
-            };
-          }
-        }
-
-        scale *= 0.75;
-      }
-
-      if (typeof image.close === "function") image.close();
-
-      if (!bestBlob || bestBlob.size > MAX_PHOTO_BYTES) {
-        throw new Error(
-          `${file.name} could not be reduced enough. Please select another picture.`
-        );
-      }
-
-      return {
-        contentType: "image/jpeg",
-        dataURL: await blobToDataURL(bestBlob),
-        size: bestBlob.size
-      };
-    }
-
-    /*
-      Show previews for the two selected pictures.
-    */
-    photoInput.addEventListener("change", () => {
-      preview.replaceChildren();
-
-      const files = Array.from(photoInput.files || []);
-
-      if (files.length !== REQUIRED_PHOTOS) {
-        showStatus(
-          `Please select exactly two pictures. You selected ${files.length}.`,
-          "error"
-        );
-        return;
-      }
-
-      statusBox.className = "status";
-      statusBox.textContent = "";
-
-      files.forEach((file) => {
-        const image = document.createElement("img");
-        const url = URL.createObjectURL(file);
-
-        image.alt = "Selected celebration picture";
-        image.src = url;
-
-        image.onload = () => URL.revokeObjectURL(url);
-
-        image.onerror = () => {
-          URL.revokeObjectURL(url);
-          image.alt = "Preview unavailable";
-        };
-
-        preview.appendChild(image);
-      });
+      element.src = objectURL;
     });
 
-    /*
-      Authenticate each customer anonymously before writing the booking.
+    URL.revokeObjectURL(objectURL);
+    return image;
 
-      The booking is created only after Firebase authentication succeeds.
-    */
-    async function getAuthenticatedCustomer() {
-      if (!firebaseReady || !auth || !database) {
-        throw new Error(
-          "Firebase could not initialize. Please refresh the page and try again."
+  } catch (error) {
+    URL.revokeObjectURL(objectURL);
+  }
+
+  const dataURL = await readFileAsDataURL(file);
+
+  return await new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.onload = () => resolve(image);
+
+    image.onerror = () => reject(
+      new Error(
+        `Your browser cannot decode ${file.name}. Please select a normal JPG or PNG image.`
+      )
+    );
+
+    image.src = dataURL;
+  });
+}
+
+function canvasToBlob(canvas, quality) {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob);
+      } else {
+        reject(
+          new Error("Your browser could not compress this picture.")
         );
       }
+    }, "image/jpeg", quality);
+  });
+}
 
-      if (auth.currentUser) {
-        return auth.currentUser;
+async function blobToDataURL(blob) {
+  return await readFileAsDataURL(blob);
+}
+
+async function compressImage(file) {
+  let image;
+
+  try {
+    image = await decodeImageFile(file);
+  } catch (error) {
+    console.error("Image decoding failed:", file.name, error);
+
+    throw new Error(
+      `${file.name} could not be processed. Please save/export it as a normal JPG or PNG and select it again.`
+    );
+  }
+
+  const originalWidth = image.width;
+  const originalHeight = image.height;
+
+  if (!originalWidth || !originalHeight) {
+    if (typeof image.close === "function") image.close();
+
+    throw new Error(
+      `${file.name} has invalid dimensions. Please select another picture.`
+    );
+  }
+
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    if (typeof image.close === "function") image.close();
+
+    throw new Error(
+      "Your browser cannot compress pictures on this device."
+    );
+  }
+
+  let scale = Math.min(
+    1,
+    1800 / Math.max(originalWidth, originalHeight)
+  );
+
+  let bestBlob = null;
+
+  for (let dimensionPass = 0; dimensionPass < 12; dimensionPass++) {
+    canvas.width = Math.max(1, Math.round(originalWidth * scale));
+    canvas.height = Math.max(1, Math.round(originalHeight * scale));
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.drawImage(
+      image,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    for (const quality of [
+      0.86, 0.76, 0.66, 0.56,
+      0.46, 0.36, 0.28, 0.20
+    ]) {
+      const blob = await canvasToBlob(canvas, quality);
+      bestBlob = blob;
+
+      if (blob.size <= MAX_PHOTO_BYTES) {
+        if (typeof image.close === "function") image.close();
+
+        return {
+          contentType: "image/jpeg",
+          dataURL: await blobToDataURL(blob),
+          size: blob.size
+        };
       }
-
-      const credential = await auth.signInAnonymously();
-
-      if (!credential || !credential.user) {
-        throw new Error(
-          "Customer authentication failed. Please try again."
-        );
-      }
-
-      return credential.user;
     }
 
-    function explainFirebaseError(error) {
-      console.error("Firebase booking error:", error);
+    scale *= 0.75;
+  }
 
-      const code = error && error.code
-        ? String(error.code)
-        : "";
+  if (typeof image.close === "function") image.close();
 
-      if (
-        code.includes("auth/operation-not-allowed") ||
-        code.includes("auth/admin-restricted-operation")
-      ) {
-        return (
-          "Anonymous sign-in is not enabled for this Firebase project. " +
-          "Check Firebase Authentication settings and enable Anonymous sign-in."
-        );
-      }
+  if (!bestBlob || bestBlob.size > MAX_PHOTO_BYTES) {
+    throw new Error(
+      `${file.name} could not be reduced enough. Please select another picture.`
+    );
+  }
 
-      if (
-        code.includes("auth/network-request-failed")
-      ) {
-        return (
-          "Firebase authentication could not connect. Check your internet connection and try again."
-        );
-      }
+  return {
+    contentType: "image/jpeg",
+    dataURL: await blobToDataURL(bestBlob),
+    size: bestBlob.size
+  };
+}
 
-      if (
-        code.includes("PERMISSION_DENIED") ||
-        code.includes("permission-denied")
-      ) {
-        return (
-          "Firebase rejected the booking. Please check that the published database rules allow authenticated customers to create audiovisualBookings."
-        );
-      }
+/* Picture previews */
 
-      if (
-        code.includes("auth/too-many-requests")
-      ) {
-        return (
-          "Too many authentication attempts were made. Please wait a while and try again."
-        );
-      }
+photoInput.addEventListener("change", () => {
+  preview.replaceChildren();
 
-      if (
-        code.includes("unavailable") ||
-        code.includes("NETWORK")
-      ) {
-        return (
-          "Firebase is temporarily unreachable. Check your internet connection and try again."
-        );
-      }
+  const files = Array.from(photoInput.files || []);
 
-      return (
-        error && error.message
-          ? error.message
-          : "The booking could not be saved. Please try again."
+  if (files.length !== REQUIRED_PHOTOS) {
+    showStatus(
+      `Please select exactly two pictures. You selected ${files.length}.`,
+      "error"
+    );
+    return;
+  }
+
+  statusBox.className = "status";
+  statusBox.textContent = "";
+
+  files.forEach((file) => {
+    const image = document.createElement("img");
+    const url = URL.createObjectURL(file);
+
+    image.alt = "Selected celebration picture";
+    image.src = url;
+
+    image.onload = () => URL.revokeObjectURL(url);
+
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      image.alt = "Preview unavailable";
+    };
+
+    preview.appendChild(image);
+  });
+});
+
+/* Firebase authentication */
+
+async function getAuthenticatedCustomer() {
+  if (!firebaseReady || !auth || !database) {
+    throw new Error(
+      "Firebase could not initialize. Please refresh the page and try again."
+    );
+  }
+
+  if (auth.currentUser) {
+    return auth.currentUser;
+  }
+
+  const credential = await auth.signInAnonymously();
+
+  if (!credential || !credential.user) {
+    throw new Error(
+      "Customer authentication failed. Please try again."
+    );
+  }
+
+  return credential.user;
+}
+
+function explainFirebaseError(error) {
+  console.error("Firebase booking error:", error);
+
+  const code = error && error.code
+    ? String(error.code)
+    : "";
+
+  if (
+    code.includes("auth/operation-not-allowed") ||
+    code.includes("auth/admin-restricted-operation")
+  ) {
+    return (
+      "Anonymous sign-in is not enabled for this Firebase project. " +
+      "Check Firebase Authentication settings and enable Anonymous sign-in."
+    );
+  }
+
+  if (code.includes("auth/network-request-failed")) {
+    return (
+      "Firebase authentication could not connect. Check your internet connection and try again."
+    );
+  }
+
+  if (
+    code.includes("PERMISSION_DENIED") ||
+    code.includes("permission-denied")
+  ) {
+    return (
+      "Firebase rejected the booking. Please check that the published database rules allow authenticated customers to create audiovisualBookings."
+    );
+  }
+
+  if (code.includes("auth/too-many-requests")) {
+    return (
+      "Too many authentication attempts were made. Please wait a while and try again."
+    );
+  }
+
+  if (
+    code.includes("unavailable") ||
+    code.includes("NETWORK")
+  ) {
+    return (
+      "Firebase is temporarily unreachable. Check your internet connection and try again."
+    );
+  }
+
+  return (
+    error && error.message
+      ? error.message
+      : "The booking could not be saved. Please try again."
+  );
+}
+
+/* Submit booking */
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (submitting) return;
+
+  const customerName =
+    document.getElementById("customerName").value.trim();
+
+  const whatsapp =
+    document.getElementById("whatsapp").value.trim();
+
+  const celebrantName =
+    document.getElementById("celebrantName").value.trim();
+
+  const relationship =
+    document.getElementById("relationship").value;
+
+  const celebrationDate = dateInput.value;
+
+  const files = Array.from(photoInput.files || []);
+
+  if (
+    !customerName ||
+    !whatsapp ||
+    !celebrantName ||
+    !relationship ||
+    !celebrationDate
+  ) {
+    showStatus(
+      "Please complete all required fields.",
+      "error"
+    );
+    return;
+  }
+
+  if (!/^\+[1-9]\d{7,14}$/.test(whatsapp)) {
+    showStatus(
+      "Enter your WhatsApp number with the international country code, for example +2348012345678.",
+      "error"
+    );
+    return;
+  }
+
+  if (files.length !== REQUIRED_PHOTOS) {
+    showStatus(
+      "Please select exactly two pictures.",
+      "error"
+    );
+    return;
+  }
+
+  submitting = true;
+  button.disabled = true;
+
+  try {
+    /* Step 1: Compress pictures */
+
+    const photos = [];
+
+    for (let i = 0; i < files.length; i++) {
+      button.textContent =
+        `COMPRESSING PICTURE ${i + 1} OF ${REQUIRED_PHOTOS}...`;
+
+      photos.push(await compressImage(files[i]));
+    }
+
+    const totalBytes = photos.reduce(
+      (sum, photo) => sum + photo.size,
+      0
+    );
+
+    if (totalBytes > MAX_TOTAL_BYTES) {
+      throw new Error(
+        "The two compressed pictures are still too large together. Please select different pictures."
       );
     }
 
-    /*
-      Submit booking directly to Firebase.
+    /* Step 2: Authenticate */
 
-      Database path:
-      audiovisualBookings/{bookingId}
+    button.textContent = "CONNECTING TO FIREBASE...";
 
-      Both pictures are saved as JPEG data URLs.
-      The booking is saved before payment.html is opened.
-    */
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
+    const customer = await getAuthenticatedCustomer();
 
-      if (submitting) return;
+    /* Step 3: Generate booking ID */
 
-      const customerName =
-        document.getElementById("customerName").value.trim();
+    button.textContent = "SAVING BOOKING DETAILS...";
 
-      const whatsapp =
-        document.getElementById("whatsapp").value.trim();
+    const bookingRef = database
+      .ref("audiovisualBookings")
+      .push();
 
-      const celebrantName =
-        document.getElementById("celebrantName").value.trim();
+    const bookingId = bookingRef.key;
 
-      const relationship =
-        document.getElementById("relationship").value;
+    if (!bookingId) {
+      throw new Error(
+        "Firebase could not generate a booking reference. Please try again."
+      );
+    }
 
-      const celebrationDate = dateInput.value;
+    /* Step 4: Prepare booking */
 
-      const files = Array.from(photoInput.files || []);
+    const booking = {
+      bookingId: bookingId,
+      customerUid: customer.uid,
+      customerName: customerName,
+      whatsapp: whatsapp,
+      celebrantName: celebrantName,
+      relationship: relationship,
+      celebrationDate: celebrationDate,
+      celebrationType: "ANNOUNCEMENT WITH AUDIOVISUAL",
+      amountNgn: BOOKING_AMOUNT,
+      paymentStatus: "pending",
 
-      if (
-        !customerName ||
-        !whatsapp ||
-        !celebrantName ||
-        !relationship ||
-        !celebrationDate
-      ) {
-        showStatus(
-          "Please complete all required fields.",
-          "error"
-        );
-        return;
-      }
+      photos: {
+        photo1: photos[0].dataURL,
+        photo2: photos[1].dataURL
+      },
 
-      if (!/^\+[1-9]\d{7,14}$/.test(whatsapp)) {
-        showStatus(
-          "Enter your WhatsApp number with the international country code, for example +2348012345678.",
-          "error"
-        );
-        return;
-      }
+      createdAt: firebase.database.ServerValue.TIMESTAMP
+    };
 
-      if (files.length !== REQUIRED_PHOTOS) {
-        showStatus(
-          "Please select exactly two pictures.",
-          "error"
-        );
-        return;
-      }
+    /* Step 5: Save booking */
 
-      submitting = true;
-      button.disabled = true;
+    await bookingRef.set(booking);
 
-      try {
-        /*
-          Step 1: Compress both pictures.
-        */
-        const photos = [];
+    /* Step 6: Remember booking reference */
 
-        for (let i = 0; i < files.length; i++) {
-          button.textContent =
-            `COMPRESSING PICTURE ${i + 1} OF ${REQUIRED_PHOTOS}...`;
-
-          photos.push(await compressImage(files[i]));
-        }
-
-        const totalBytes = photos.reduce(
-          (sum, photo) => sum + photo.size,
-          0
-        );
-
-        if (totalBytes > MAX_TOTAL_BYTES) {
-          throw new Error(
-            "The two compressed pictures are still too large together. Please select different pictures."
-          );
-        }
-
-        /*
-          Step 2: Authenticate the customer.
-        */
-        button.textContent = "CONNECTING TO FIREBASE...";
-
-        const customer = await getAuthenticatedCustomer();
-
-        /*
-          Step 3: Generate a unique Firebase booking ID.
-        */
-        button.textContent = "SAVING BOOKING DETAILS...";
-
-        const bookingRef = database
-          .ref("audiovisualBookings")
-          .push();
-
-        const bookingId = bookingRef.key;
-
-        if (!bookingId) {
-          throw new Error(
-            "Firebase could not generate a booking reference. Please try again."
-          );
-        }
-
-        /*
-          Step 4: Prepare the booking to match the published Firebase rules.
-        */
-        const booking = {
+    try {
+      sessionStorage.setItem(
+        "kulzzyAudiovisualBooking",
+        JSON.stringify({
           bookingId: bookingId,
-          customerUid: customer.uid,
-          customerName: customerName,
-          whatsapp: whatsapp,
-          celebrantName: celebrantName,
-          relationship: relationship,
-          celebrationDate: celebrationDate,
-          celebrationType: "ANNOUNCEMENT WITH AUDIOVISUAL",
-          amountNgn: BOOKING_AMOUNT,
-          paymentStatus: "pending",
+          amount: BOOKING_AMOUNT,
+          product: "Announcement With Audiovisual",
+          paymentStatus: "pending"
+        })
+      );
+    } catch (storageError) {
+      console.warn(
+        "Could not save the session reference:",
+        storageError
+      );
+    }
 
-          photos: {
-            photo1: photos[0].dataURL,
-            photo2: photos[1].dataURL
-          },
+    PAYMENT_PAGE_URL.searchParams.set(
+      "bookingId",
+      bookingId
+    );
 
-          createdAt: firebase.database.ServerValue.TIMESTAMP
-        };
+    PAYMENT_PAGE_URL.searchParams.set(
+      "amount",
+      String(BOOKING_AMOUNT)
+    );
 
-        /*
-          Step 5: Save the booking before opening the payment page.
-        */
-        await bookingRef.set(booking);
+    showStatus(
+      "Your booking and both pictures have been saved successfully. Opening the payment page...",
+      "success"
+    );
 
-        /*
-          Step 6: Remember the booking reference for payment.html.
-          This does not mean payment has been verified.
-        */
-        try {
-          sessionStorage.setItem(
-            "kulzzyAudiovisualBooking",
-            JSON.stringify({
-              bookingId: bookingId,
-              amount: BOOKING_AMOUNT,
-              product: "Announcement With Audiovisual",
-              paymentStatus: "pending"
-            })
-          );
-        } catch (storageError) {
-          console.warn(
-            "Could not save the session reference:",
-            storageError
-          );
-        }
+    button.textContent = "OPENING PAYMENT...";
 
-        PAYMENT_PAGE_URL.searchParams.set(
-          "bookingId",
-          bookingId
-        );
+    setTimeout(() => {
+      window.location.assign(PAYMENT_PAGE_URL.toString());
+    }, 500);
 
-        PAYMENT_PAGE_URL.searchParams.set(
-          "amount",
-          String(BOOKING_AMOUNT)
-        );
+  } catch (error) {
+    const message = explainFirebaseError(error);
 
-        showStatus(
-          "Your booking and both pictures have been saved successfully. Opening the payment page...",
-          "success"
-        );
+    showStatus(message, "error");
 
-        button.textContent = "OPENING PAYMENT...";
+    button.disabled = false;
+    button.textContent = "MAKE PAYMENT NOW — ₦10,000";
 
-        /*
-          Allow the success message to render before navigating.
-        */
-        setTimeout(() => {
-          window.location.assign(PAYMENT_PAGE_URL.toString());
-        }, 500);
-
-      } catch (error) {
-        const message = explainFirebaseError(error);
-
-        showStatus(message, "error");
-
-        button.disabled = false;
-        button.textContent = "MAKE PAYMENT NOW — ₦10,000";
-
-        submitting = false;
-      }
-    });
-  </script></body>
+    submitting = false;
+  }
+});
+</script></body>
 </html>
